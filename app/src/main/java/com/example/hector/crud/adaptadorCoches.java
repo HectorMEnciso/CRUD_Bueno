@@ -52,7 +52,7 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
     }
 
     public void delCoches(ArrayList<Coches> c, int posi) {
-        c.remove(posi);//Borra Coches selecionada
+        c.remove(posi);//Borra Coches selecionadas
     }
 
     public void deleteAll(ArrayList<Coches> c) {
