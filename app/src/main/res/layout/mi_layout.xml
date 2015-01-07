@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <ImageView
+        android:id="@+id/ivContactImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentLeft="true"/>
+    <TextView
+        android:id="@+id/lblMatricula"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_toRightOf="@+id/ivContactImage"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/lblMarca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:layout_below="@+id/lblMatricula"
+        android:layout_toRightOf="@+id/ivContactImage"
+        android:textStyle="normal"/>
+
+    <TextView
+        android:id="@+id/lblModelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:layout_below="@+id/lblMarca"
+        android:layout_toRightOf="@+id/ivContactImage"
+        android:textColor="#008080"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/lblCilindrada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:layout_below="@+id/lblModelo"
+        android:layout_toRightOf="@+id/ivContactImage"
+        android:textStyle="normal"/>
+
+    <TextView
+        android:id="@+id/lblMotorizacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:layout_below="@+id/lblCilindrada"
+        android:layout_toRightOf="@+id/ivContactImage"
+        android:textStyle="normal"/>
+
+    <TextView
+        android:id="@+id/lblFechaCompra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textSize="22dp"
+        android:textColor="#008080"
+        android:textStyle="bold"/>
+</RelativeLayout>

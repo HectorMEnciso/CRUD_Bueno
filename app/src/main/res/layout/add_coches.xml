@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:contentDescription="Pulse para seleccionar imagen"
+                android:layout_height="150dp"
+                android:id="@+id/imgViewContactImage"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/car"
+                android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:id="@+id/lblMatricula"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Introduzca Matricula: "
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/entradaMatricula"
+                android:hint="Matricula: A0000XX..."
+                android:background="@drawable/estilo"
+                android:textColorHint="#FF0000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <requestFocus />
+            </EditText>
+
+            <TextView
+                android:id="@+id/lblMarca"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Introduzca Marca: "
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/entradaMarca"
+                android:hint="Marca: Ford, Audi..."
+                android:textColorHint="#FF0000"
+                android:layout_width="match_parent"
+                android:background="@drawable/estilo"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/lblModelo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Introduzca Modelo: "
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/entradaModelo"
+                android:hint="Modelo: Mondeo, A3..."
+                android:textColorHint="#FF0000"
+                android:background="@drawable/estilo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/lblMotorizacion"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Seleccione motorización: "
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spnMotorizacion"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+               />
+
+            <TextView
+                android:id="@+id/lblCilindrada"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:typeface="sans"
+                android:text="Introduzca Cilindrada: "
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/entradaCilindrada"
+                android:layout_width="match_parent"
+                android:hint="Cilindrada(sólo numeros): 1600, 2500..."
+                android:textColorHint="#FF0000"
+                android:background="@drawable/estilo"
+                android:inputType="number"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/lblFechaCompra"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Introduzca Fecha de compra: "
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="wrap_content"
+                android:calendarViewShown="false"
+                android:layout_height="wrap_content"
+                android:endYear="2100"
+                android:startYear="1950"
+                android:layout_gravity="center" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/btnAñadir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/estilos_botones"
+                        android:onClick="onClick"
+                        android:text="Añadir" />
+
+                    <Button
+                        android:id="@+id/btnCancelar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/estilos_botones"
+                        android:layout_gravity="center"
+                        android:onClick="onClickCancelar"
+                        android:text="Cancelar" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
