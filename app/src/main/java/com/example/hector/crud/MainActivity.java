@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     adaptadorCoches adaptador;
     private ArrayList<Coches> datos = new ArrayList<Coches>();
     int posi;
-//pruebaError
+//pruebaError/pruebaeNERO
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
