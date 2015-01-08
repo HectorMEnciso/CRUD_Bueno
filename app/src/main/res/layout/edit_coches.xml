@@ -29,9 +29,8 @@
 
             <EditText
                 android:id="@+id/entradaMatricula"
-
+                android:textSize="25dp"
                 android:background="@drawable/estilo"
-
                 android:layout_width="601dp"
                 android:layout_height="35dp">
                 <requestFocus />
@@ -46,7 +45,7 @@
 
             <EditText
                 android:id="@+id/entradaMarca"
-
+                android:textSize="25dp"
                 android:layout_width="match_parent"
                 android:background="@drawable/estilo"
                 android:layout_height="35dp" />
@@ -61,7 +60,7 @@
 
             <EditText
                 android:id="@+id/entradaModelo"
-
+                android:textSize="25dp"
                 android:background="@drawable/estilo"
                 android:layout_width="match_parent"
                 android:layout_height="35dp" />
@@ -91,7 +90,7 @@
             <EditText
                 android:id="@+id/entradaCilindrada"
                 android:layout_width="match_parent"
-
+                android:textSize="25dp"
                 android:background="@drawable/estilo"
                 android:inputType="number"
                 android:layout_height="35dp" />

@@ -29,12 +29,13 @@
 
         <EditText
             android:id="@+id/entradaMatricula"
+            android:maxLength="8"
+            android:textSize="25dp"
             android:hint="A0000XX ó 0000XXX..."
             android:background="@drawable/estilo"
             android:textColorHint="#FF0000"
             android:layout_width="match_parent"
             android:layout_height="35dp">
-
             <requestFocus />
         </EditText>
 
@@ -50,6 +51,7 @@
             android:id="@+id/entradaMarca"
             android:hint="Audi, Opel, Citröen..."
             android:textColorHint="#FF0000"
+            android:textSize="25dp"
             android:layout_width="match_parent"
             android:background="@drawable/estilo"
             android:layout_height="35dp" />
@@ -66,6 +68,7 @@
             android:id="@+id/entradaModelo"
             android:hint="A4, Insignia, Xsara..."
             android:textColorHint="#FF0000"
+            android:textSize="25dp"
             android:background="@drawable/estilo"
             android:layout_width="match_parent"
             android:layout_height="35dp" />
@@ -96,6 +99,7 @@
             android:id="@+id/entradaCilindrada"
             android:layout_width="match_parent"
             android:hint="1600, 2500..."
+            android:textSize="25dp"
             android:textColorHint="#FF0000"
             android:background="@drawable/estilo"
             android:inputType="number"
