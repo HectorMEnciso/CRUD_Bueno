@@ -21,7 +21,6 @@ import java.util.ArrayList;
 public class adaptadorCoches extends BaseAdapter implements Filterable {
 
     public ArrayList<Coches> orig;
-
     Context context;
     ArrayList<Coches> co;
 
@@ -142,8 +141,10 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
             @Override
             protected void publishResults(CharSequence constraint,
                                           FilterResults results) {
+                //co.remove(0);
                 co = (ArrayList<Coches>) results.values;
                 Log.e("numeroElementos",String.valueOf(co.size()));
+
                 notifyDataSetChanged();
             }
         };

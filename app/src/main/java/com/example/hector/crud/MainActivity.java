@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.File;
@@ -48,7 +49,22 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Intent data = new Intent(MainActivity.this, editActivity.class);
-                data.putExtra("Matricula", datos.get(position).getMatricula().toString());
+                TextView matricula=(TextView) v.findViewById(R.id.lblMatricula);
+                String m= matricula.getText().toString();
+                for(int x=0;x<datos.size();x++){
+                    if(datos.get(x).getMatricula().toString().equalsIgnoreCase(m)){
+                data.putExtra("Matricula", datos.get(x).getMatricula().toString());
+                data.putExtra("Marca", datos.get(x).getMarca().toString());
+                data.putExtra("Modelo", datos.get(x).getModelo().toString());
+                data.putExtra("Motorizacion", datos.get(x).getMotorizacion().toString());//PASAR VALOR AL SPINNER DE EDIT
+                data.putExtra("Cilindrada", datos.get(x).getCilindrada());
+                data.putExtra("Fecha", datos.get(x).getFechaCompra().toString());//PASAR FECHA AL DATEPICKER DE EDIT ACTIVITY
+                data.putExtra("Imagen", datos.get(x).getImageURI().toString());
+                data.putExtra("Position", x);
+                startActivityForResult(data, 2);
+                    }
+                }
+                /*data.putExtra("Matricula", datos.get(position).getMatricula().toString());
                 data.putExtra("Marca", datos.get(position).getMarca().toString());
                 data.putExtra("Modelo", datos.get(position).getModelo().toString());
                 data.putExtra("Motorizacion", datos.get(position).getMotorizacion().toString());//PASAR VALOR AL SPINNER DE EDIT
@@ -56,7 +72,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 data.putExtra("Fecha", datos.get(position).getFechaCompra().toString());//PASAR FECHA AL DATEPICKER DE EDIT ACTIVITY
                 data.putExtra("Imagen", datos.get(position).getImageURI().toString());
                 data.putExtra("Position", position);
-                startActivityForResult(data, 2);
+                startActivityForResult(data, 2);*/
             }
         });
     }
