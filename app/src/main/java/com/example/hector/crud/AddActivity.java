@@ -35,7 +35,7 @@ public class AddActivity extends Activity {
     private Button reset;
     private String opnSpinner;
     ImageView contactImageImgView;
-    Uri imageUri;// = Uri.parse("android.resource://com.example.hector.crud/drawable/car.png");
+    Uri imageUri = Uri.parse("android.resource://com.example.hector.crud/drawable/car.png");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
