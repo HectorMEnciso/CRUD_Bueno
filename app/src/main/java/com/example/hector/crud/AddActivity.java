@@ -121,7 +121,7 @@ public void onClickReset(View v){
     Modelo.setText("");
     Motorizacion.setSelection(0);
     Cilindrada.setText("");
-
+    FechaCompra.updateDate(FechaCompra.getYear(),FechaCompra.getMonth(),FechaCompra.getDayOfMonth());
     //FechaCompra.updateDate(fecha.da);
 }
 }

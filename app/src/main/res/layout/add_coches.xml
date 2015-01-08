@@ -123,7 +123,7 @@
                 android:startYear="1950"
                 android:layout_gravity="center" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="match_parent">
@@ -131,6 +131,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
+                    android:gravity="center_horizontal"
                     android:layout_height="match_parent">
 
                     <Button
@@ -151,12 +152,13 @@
                         android:text="Cancelar" />
                     <Button
                         android:id="@+id/btnReset"
+
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/estilos_botones"
                         android:onClick="onClickReset"
                         android:text="Reset" />
                 </LinearLayout>
-            </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
 </ScrollView>
