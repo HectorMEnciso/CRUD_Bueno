@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+
     android:layout_width="fill_parent"
+    android:background="@color/accent_material_dark"
     android:layout_height="fill_parent">
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,7 +37,7 @@
                 android:background="@drawable/estilo"
                 android:textColorHint="#FF0000"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="35dp">
 
                 <requestFocus />
             </EditText>
@@ -55,7 +56,7 @@
                 android:textColorHint="#FF0000"
                 android:layout_width="match_parent"
                 android:background="@drawable/estilo"
-                android:layout_height="wrap_content" />
+                android:layout_height="35dp" />
 
             <TextView
                 android:id="@+id/lblModelo"
@@ -71,7 +72,7 @@
                 android:textColorHint="#FF0000"
                 android:background="@drawable/estilo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="35dp" />
 
             <TextView
                 android:id="@+id/lblMotorizacion"
@@ -103,7 +104,7 @@
                 android:textColorHint="#FF0000"
                 android:background="@drawable/estilo"
                 android:inputType="number"
-                android:layout_height="wrap_content" />
+                android:layout_height="35dp" />
 
             <TextView
                 android:id="@+id/lblFechaCompra"
@@ -129,12 +130,12 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:layout_height="match_parent">
 
                     <Button
                         android:id="@+id/btnAñadir"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@drawable/estilos_botones"
@@ -143,14 +144,19 @@
 
                     <Button
                         android:id="@+id/btnCancelar"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/estilos_botones"
-                        android:layout_gravity="center"
                         android:onClick="onClickCancelar"
                         android:text="Cancelar" />
+                    <Button
+                        android:id="@+id/btnReset"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/estilos_botones"
+                        android:onClick="onClickReset"
+                        android:text="Reset" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+</ScrollView>

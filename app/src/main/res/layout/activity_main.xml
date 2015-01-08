@@ -15,7 +15,7 @@
         android:id="@+id/LstOpciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#ff9f3f"
+        android:background="@color/highlighted_text_material_dark"
         >
     </ListView>
 </LinearLayout>

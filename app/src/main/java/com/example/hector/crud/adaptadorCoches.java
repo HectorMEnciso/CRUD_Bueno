@@ -3,6 +3,7 @@ package com.example.hector.crud;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -142,14 +143,15 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
             protected void publishResults(CharSequence constraint,
                                           FilterResults results) {
                 co = (ArrayList<Coches>) results.values;
+                Log.e("numeroElementos",String.valueOf(co.size()));
                 notifyDataSetChanged();
             }
         };
     }
 
-    public void notifyDataSetChanged() {
+    /*public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
-    }
+    }*/
 
 
     @Override

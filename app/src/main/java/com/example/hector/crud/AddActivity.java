@@ -2,19 +2,23 @@ package com.example.hector.crud;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by Hector on 28/12/2014.
@@ -28,14 +32,21 @@ public class AddActivity extends Activity {
     private Spinner Motorizacion;
     private EditText Cilindrada;
     private DatePicker FechaCompra;
+    private Button reset;
     private String opnSpinner;
     ImageView contactImageImgView;
-    Uri imageUri = Uri.parse("android.resource://com.example.hector.crud/drawable/no_moto.png");
+    Uri imageUri;// = Uri.parse("android.resource://com.example.hector.crud/drawable/car.png");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_coches);
+        Matricula = (EditText) findViewById(R.id.entradaMatricula);
+        Marca = (EditText) findViewById(R.id.entradaMarca);
+        Modelo = (EditText) findViewById(R.id.entradaModelo);
+        Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
+        Cilindrada=(EditText)findViewById(R.id.entradaCilindrada);
+        reset=(Button)findViewById(R.id.btnReset);
         Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
         FechaCompra=(DatePicker)findViewById(R.id.datePicker);
         ArrayAdapter<String> adap=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,datos);
@@ -81,11 +92,7 @@ public class AddActivity extends Activity {
     public void onClick(View v){
         Intent data = new Intent();
         Bundle b= new Bundle();
-        Matricula = (EditText) findViewById(R.id.entradaMatricula);
-        Marca = (EditText) findViewById(R.id.entradaMarca);
-        Modelo = (EditText) findViewById(R.id.entradaModelo);
-        Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
-        Cilindrada=(EditText)findViewById(R.id.entradaCilindrada);
+
         int dia,mes,anno;
         dia=FechaCompra.getDayOfMonth();
         mes=FechaCompra.getMonth()+1;
@@ -107,4 +114,14 @@ public class AddActivity extends Activity {
         finish();
     }
 
+public void onClickReset(View v){
+    contactImageImgView.setImageResource(R.drawable.car);
+    Matricula.setText("");
+    Marca.setText("");
+    Modelo.setText("");
+    Motorizacion.setSelection(0);
+    Cilindrada.setText("");
+
+    //FechaCompra.updateDate(fecha.da);
+}
 }
