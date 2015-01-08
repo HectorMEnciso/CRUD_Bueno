@@ -129,7 +129,7 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
                     if (orig != null && orig.size() > 0) {
                         for (final Coches g : orig) {
                             if (g.getMatricula().toLowerCase()
-                                    .contains(constraint.toString()))
+                                    .contains(constraint.toString().toLowerCase()))
                                 results.add(g);
                         }
                     }
