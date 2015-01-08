@@ -4,14 +4,10 @@
     android:background="@color/accent_material_dark"
     android:layout_height="fill_parent">
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
 
             <ImageView
                 android:layout_width="150dp"
@@ -20,17 +16,14 @@
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/car"
                 android:background="@drawable/estilos_botones"
-                android:layout_marginTop="10dp"
-                />
-
-
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:id="@+id/lblMatricula"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Introduzca Matricula: "
+                android:text="MATRICULA A MODIFICAR"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -47,7 +40,7 @@
                 android:id="@+id/lblMarca"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Introduzca Marca: "
+                android:text="MARCA A MODIFICAR"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -62,7 +55,7 @@
                 android:id="@+id/lblModelo"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Introduzca Modelo: "
+                android:text="MODELO A MODIFICAR"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -77,7 +70,7 @@
                 android:id="@+id/lblMotorizacion"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Seleccione motorización: "
+                android:text="MOTORIZACION A MODIFICAR"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -91,7 +84,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:typeface="sans"
-                android:text="Introduzca Cilindrada: "
+                android:text="CILINDRADA A MODIFICAR"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -107,7 +100,7 @@
                 android:id="@+id/lblFechaCompra"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Introduzca Fecha de compra: "
+                android:text="FECHA COMPRA A MODIFICAR"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -132,6 +125,8 @@
 
                     <Button
                         android:id="@+id/btnAñadir"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -142,6 +137,7 @@
                     <Button
                         android:id="@+id/btnCancelar"
                         android:layout_width="100dp"
+                        android:layout_marginRight="10dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/estilos_botones"
                         android:onClick="onClickCancelar"
