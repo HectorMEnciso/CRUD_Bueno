@@ -120,6 +120,7 @@
                 android:calendarViewShown="false"
                 android:layout_height="wrap_content"
                 android:endYear="2100"
+                android:layout_marginBottom="10dp"
                 android:startYear="1950"
                 android:layout_gravity="center" />
 
@@ -137,8 +138,10 @@
                     <Button
                         android:id="@+id/btnAñadir"
                         android:layout_width="100dp"
+                        android:layout_marginRight="10dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
                         android:background="@drawable/estilos_botones"
                         android:onClick="onClick"
                         android:text="Añadir" />
@@ -146,13 +149,14 @@
                     <Button
                         android:id="@+id/btnCancelar"
                         android:layout_width="100dp"
+                        android:layout_marginRight="10dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/estilos_botones"
                         android:onClick="onClickCancelar"
                         android:text="Cancelar" />
                     <Button
                         android:id="@+id/btnReset"
-
+                        android:layout_marginRight="10dp"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/estilos_botones"
