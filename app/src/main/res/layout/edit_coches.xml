@@ -15,7 +15,7 @@
                 android:id="@+id/imgViewContactImage"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/car"
-                android:background="@drawable/estilos_botones"
+                android:background="@drawable/estilos_imageview"
                 android:layout_marginTop="10dp"/>
 
             <TextView

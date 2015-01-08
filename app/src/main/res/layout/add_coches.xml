@@ -12,7 +12,7 @@
             android:layout_width="150dp"
             android:contentDescription="Pulse para seleccionar imagen"
             android:layout_height="150dp"
-            android:background="@drawable/estilos_botones"
+            android:background="@drawable/estilos_imageview"
             android:id="@+id/imgViewContactImage"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/car"

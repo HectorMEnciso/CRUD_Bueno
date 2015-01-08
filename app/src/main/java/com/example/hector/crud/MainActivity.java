@@ -2,6 +2,7 @@ package com.example.hector.crud;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -43,6 +44,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         LstOpciones.setTextFilterEnabled(true);
         registerForContextMenu(LstOpciones);
         mSearchView = (SearchView) findViewById(R.id.searchView1);////////////////////
+        mSearchView.setBackgroundColor(Color.LTGRAY);
         LstOpciones.setTextFilterEnabled(true);////////////////
         setupSearchView();///////////////////
         LstOpciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {

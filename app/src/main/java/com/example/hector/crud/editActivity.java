@@ -62,11 +62,11 @@ public class editActivity extends Activity {
                         Bundle b= new Bundle();
                         b.putInt("Position", position);
                         b.putString("Imagen",imageUri.toString());
-                        b.putString("Matricula",Matricula.getText().toString());
-                        b.putString("Marca", Marca.getText().toString());
-                        b.putString("Modelo", Modelo.getText().toString());
+                        b.putString("Matricula",Matricula.getText().toString().toUpperCase());
+                        b.putString("Marca", Marca.getText().toString().toUpperCase());
+                        b.putString("Modelo", Modelo.getText().toString().toUpperCase());
                         b.putString("Cilindrada", Cilindrada.getText().toString());
-                        b.putString("Motorizacion",opnSpinner.toString());
+                        b.putString("Motorizacion",opnSpinner.toString().toUpperCase());
                         b.putString("FechaCompra",fecha.toString());
                         data.putExtras(b);
                         setResult(RESULT_OK,data);

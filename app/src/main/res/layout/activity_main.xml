@@ -14,8 +14,16 @@
     <ListView
         android:id="@+id/LstOpciones"
         android:layout_width="wrap_content"
+        android:divider="#0F1E81"
+        android:scrollbarStyle="outsideOverlay"
         android:layout_height="wrap_content"
-        android:background="@color/highlighted_text_material_dark"
+        android:dividerHeight="4dp"
+        android:paddingBottom="7dp"
+        android:paddingLeft="9dp"
+        android:paddingRight="9dp"
+        android:paddingTop="10dp"
+        android:background="@drawable/border_ui"
         >
     </ListView>
 </LinearLayout>
+    <!--android:background="@color/highlighted_text_material_dark"-->

@@ -11,7 +11,7 @@
         android:id="@+id/lblMatricula"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="30dp"
         android:layout_toRightOf="@+id/ivContactImage"
         android:textStyle="bold"/>
 
@@ -19,7 +19,7 @@
         android:id="@+id/lblMarca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10dp"
+        android:textSize="15dp"
         android:layout_below="@+id/lblMatricula"
         android:layout_toRightOf="@+id/ivContactImage"
         android:textStyle="normal"/>
@@ -28,9 +28,10 @@
         android:id="@+id/lblModelo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="22dp"
+        android:textSize="25dp"
         android:layout_below="@+id/lblMarca"
         android:layout_toRightOf="@+id/ivContactImage"
+        android:layout_alignParentRight="true"
         android:textColor="#008080"
         android:textStyle="bold"/>
 
@@ -38,7 +39,7 @@
         android:id="@+id/lblCilindrada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10dp"
+        android:textSize="15dp"
         android:layout_below="@+id/lblModelo"
         android:layout_toRightOf="@+id/ivContactImage"
         android:textStyle="normal"/>
@@ -47,7 +48,7 @@
         android:id="@+id/lblMotorizacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10dp"
+        android:textSize="15dp"
         android:layout_below="@+id/lblCilindrada"
         android:layout_toRightOf="@+id/ivContactImage"
         android:textStyle="normal"/>
@@ -56,6 +57,8 @@
         android:id="@+id/lblFechaCompra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/lblMotorizacion"
+        android:layout_alignBaseline="@id/lblMotorizacion"
         android:layout_alignParentRight="true"
         android:textSize="22dp"
         android:textColor="#008080"
