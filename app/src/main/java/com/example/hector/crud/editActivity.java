@@ -29,6 +29,7 @@ public class editActivity extends Activity {
     private EditText Cilindrada;
     private DatePicker FechaCompra;
     private String opnSpinner;
+    boolean entroGaleria=false;
     int position;
     Uri imageUri = Uri.parse("android.resource://com.example.hector.crud/drawable/no_moto.png");
     ImageView contactImageImgView;
@@ -90,6 +91,7 @@ public class editActivity extends Activity {
         if (resCode == RESULT_OK) {
             if (reqCode == 1) {
                 imageUri = data.getData();
+                entroGaleria=true;
                 contactImageImgView.setImageURI(data.getData());
             }
         }
@@ -126,7 +128,12 @@ public class editActivity extends Activity {
         marca=getIntent().getStringExtra("Marca");
         modelo=getIntent().getStringExtra("Modelo");
         cilindrada=getIntent().getStringExtra("Cilindrada");
-        imagen=getIntent().getStringExtra("Imagen");
+
+        if(!entroGaleria) {
+            imageUri = Uri.parse(getIntent().getStringExtra("Imagen"));
+            entroGaleria=false;
+        }
+
         position=getIntent().getIntExtra("Position",0);
         Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
         ArrayAdapter<String> adap=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,datos);
@@ -176,9 +183,9 @@ public class editActivity extends Activity {
 
         });
 
-        if (imagen!=null){
+       /* if (imagen!=null){
             imageUri= Uri.parse(imagen);
-        }
+        }*/
 
         contactImageImgView.setImageURI(imageUri);
     }
