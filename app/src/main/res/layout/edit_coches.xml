@@ -109,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:endYear="2100"
                 android:startYear="1950"
+                android:layout_marginBottom="10dp"
                 android:layout_gravity="center"
                 android:calendarViewShown="false" />
             <RelativeLayout
