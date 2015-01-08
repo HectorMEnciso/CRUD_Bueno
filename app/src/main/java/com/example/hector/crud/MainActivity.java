@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     private ListView LstOpciones;
     adaptadorCoches adaptador;
     private ArrayList<Coches> datos = new ArrayList<Coches>();
-    int posi;
+    int posi,x;
 //pruebaError/pruebaeNERO
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +51,11 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 Intent data = new Intent(MainActivity.this, editActivity.class);
                 TextView matricula=(TextView) v.findViewById(R.id.lblMatricula);
                 String m= matricula.getText().toString();
-                for(int x=0;x<datos.size();x++){
-                    if(datos.get(x).getMatricula().toString().equalsIgnoreCase(m)){
+                for(int k=0;k<datos.size();k++) {
+                    if (datos.get(k).getMatricula().toString().equalsIgnoreCase(m)) {
+                       x=k;
+                    }
+                }
                 data.putExtra("Matricula", datos.get(x).getMatricula().toString());
                 data.putExtra("Marca", datos.get(x).getMarca().toString());
                 data.putExtra("Modelo", datos.get(x).getModelo().toString());
@@ -62,8 +65,8 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 data.putExtra("Imagen", datos.get(x).getImageURI().toString());
                 data.putExtra("Position", x);
                 startActivityForResult(data, 2);
-                    }
-                }
+
+
                 /*data.putExtra("Matricula", datos.get(position).getMatricula().toString());
                 data.putExtra("Marca", datos.get(position).getMarca().toString());
                 data.putExtra("Modelo", datos.get(position).getModelo().toString());
