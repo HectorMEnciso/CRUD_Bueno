@@ -59,6 +59,8 @@ public class editActivity extends Activity {
                         mes=FechaCompra.getMonth()+1;
                         anno=FechaCompra.getYear();
                         String fecha=dia+"/"+mes+"/"+anno;
+                        position=getIntent().getIntExtra("Position",0);//recibo posicion correcta del elemento buscado
+                        Log.e("posicionEdit",String.valueOf(position));
                         Bundle b= new Bundle();
                         b.putInt("Position", position);
                         b.putString("Imagen",imageUri.toString());
@@ -134,7 +136,7 @@ public class editActivity extends Activity {
             entroGaleria=false;
         }
 
-        position=getIntent().getIntExtra("Position",0);
+        //position=getIntent().getIntExtra("Position",0);
         Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
         ArrayAdapter<String> adap=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,datos);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

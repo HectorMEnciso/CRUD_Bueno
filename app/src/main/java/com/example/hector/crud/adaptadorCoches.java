@@ -30,12 +30,13 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
         this.context = context;
        this.co = c;
     }
-
     public void addCoche(String Matricula, String Marca, String Modelo, String Motorizacion, String Cilindrada, String FechaCompra, Uri ImageUri) {
         co.add(new Coches(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, ImageUri));
     }
-
-
+    /*public void addCoches(ArrayList<Coches> c){
+        c.add(new Coches(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, ImageUri));
+    }*/
+//EN el main hay dos llamadas al metodo addCoches, según tú debo pasarle el array datos pero no se muy bien como.
     private class ViewHolder {
         ImageView fot;
         TextView mat;
@@ -128,7 +129,7 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
                     if (orig != null && orig.size() > 0) {
                         for (final Coches g : orig) {
                             if (g.getMatricula().toLowerCase()
-                                    .contains(constraint.toString().toLowerCase()))
+                                    .contains(constraint.toString().toUpperCase()))
                                 results.add(g);
                         }
                     }
