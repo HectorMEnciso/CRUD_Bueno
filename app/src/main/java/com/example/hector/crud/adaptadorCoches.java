@@ -24,19 +24,14 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
     Context context;
     ArrayList<Coches> co;
 
-
     adaptadorCoches(Activity context, ArrayList<Coches> c) {
        super();
-        this.context = context;
+       this.context = context;
        this.co = c;
     }
     public void addCoche(String Matricula, String Marca, String Modelo, String Motorizacion, String Cilindrada, String FechaCompra, Uri ImageUri,ArrayList<Coches> c) {
         c.add(new Coches(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, ImageUri));
     }
-    /*public void addCoches(ArrayList<Coches> c){
-        c.add(new Coches(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, ImageUri));
-    }*/
-//EN el main hay dos llamadas al metodo addCoches, según tú debo pasarle el array datos pero no se muy bien como.
     private class ViewHolder {
         ImageView fot;
         TextView mat;
@@ -46,7 +41,6 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
         TextView mot;
         TextView fec;
     }
-
 
     public void editCoche(Coches c, int posicion,ArrayList<Coches> d) {
         d.set(posicion, c);
@@ -60,9 +54,7 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
         c.clear();
     }
 
-
     public View getView(int position, View convertView, ViewGroup parent) {
-
         ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.mi_layout, parent, false);
@@ -78,7 +70,6 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
         holder.fot.setImageURI(co.get(position).getImageURI());
         holder.mat.setText(co.get(position).getMatricula());
         holder.mar.setText(co.get(position).getMarca());
@@ -86,8 +77,6 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
         holder.mot.setText(co.get(position).getMotorizacion());
         holder.cili.setText(co.get(position).getCilindrada());
         holder.fec.setText(co.get(position).getFechaCompra());
-
-
         return convertView;
 
       /* ImageView ivContactImage = (ImageView) item.findViewById(R.id.ivContactImage);
@@ -112,11 +101,8 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
         FechaCompra.setText(co.get(position).getFechaCompra());
         return(item);*/
     }
-
-
     public Filter getFilter() {
         return new Filter() {
-
             @Override
             protected Filter.FilterResults performFiltering(CharSequence constraint) {
                 final FilterResults oReturn = new FilterResults();
@@ -135,24 +121,15 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
                 }
                 return oReturn;
             }
-
             @SuppressWarnings("unchecked")
             @Override
-            protected void publishResults(CharSequence constraint,
-                                          FilterResults results) {
-                //co.remove(0);
+            protected void publishResults(CharSequence constraint,FilterResults results) {
                 co = (ArrayList<Coches>) results.values;
                 Log.e("numeroElementos",String.valueOf(co.size()));
-
                 notifyDataSetChanged();
             }
         };
     }
-
-    /*public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-    }*/
-
 
     @Override
     public int getCount() {

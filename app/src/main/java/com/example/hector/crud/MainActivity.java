@@ -117,9 +117,8 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         if (v.getId() == R.id.LstOpciones) {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 
-            //menu.setHeaderTitle(LstOpciones.getAdapter().getItem(info.position).toString());
             menu.setHeaderTitle(datos.get(info.position).getMatricula());
-            //menu.setHeaderIcon(R.drawable.car);
+
             inflater.inflate(R.menu.opciones_elementos, menu);
         }
     }
