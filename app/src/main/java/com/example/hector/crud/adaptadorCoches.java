@@ -30,8 +30,8 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
         this.context = context;
        this.co = c;
     }
-    public void addCoche(String Matricula, String Marca, String Modelo, String Motorizacion, String Cilindrada, String FechaCompra, Uri ImageUri,ArrayList<Coches> datos) {
-        co.add(new Coches(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, ImageUri));
+    public void addCoche(String Matricula, String Marca, String Modelo, String Motorizacion, String Cilindrada, String FechaCompra, Uri ImageUri,ArrayList<Coches> c) {
+        c.add(new Coches(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, ImageUri));
     }
     /*public void addCoches(ArrayList<Coches> c){
         c.add(new Coches(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, ImageUri));
@@ -48,8 +48,8 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
     }
 
 
-    public void editCoche(Coches c, int posicion,ArrayList<Coches> datos) {
-        co.set(posicion, c);
+    public void editCoche(Coches c, int posicion,ArrayList<Coches> d) {
+        d.set(posicion, c);
     }
 
     public void delCoches(ArrayList<Coches> c, int posi) {
@@ -63,11 +63,9 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
-
         ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.mi_layout, parent, false);
-
             holder = new ViewHolder();
             holder.fot = (ImageView) convertView.findViewById(R.id.ivContactImage);
             holder.mat = (TextView) convertView.findViewById(R.id.lblMatricula);

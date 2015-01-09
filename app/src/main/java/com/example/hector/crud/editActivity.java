@@ -137,7 +137,7 @@ public class editActivity extends Activity {
             entroGaleria=false;
         }
 
-        position=getIntent().getIntExtra("Position",0);
+        //position=getIntent().getIntExtra("Position",0);
         Log.e("posicionEdit",String.valueOf(position));
         Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
         ArrayAdapter<String> adap=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,datos);
@@ -160,21 +160,12 @@ public class editActivity extends Activity {
         Cilindrada.setText(cilindrada);
         Motorizacion.setSelection(posMoto);//definir valor spinner mediante la posición.
 
-        ///////////////////////////////////////////////////////////////////////////
-
-        String str[] = fecha.split("/");
+        String str[] = fecha.split("/");//Vector con caracter delimitador
         int day = Integer.parseInt(str[0]);
         int month = Integer.parseInt(str[1]);
         int year = Integer.parseInt(str[2]);
 
-        Log.e("DIAAAA", String.valueOf(day));
-        Log.e("MEEES", String.valueOf(month));
-        Log.e("AÑOOOOO", String.valueOf(year));
-
-        //definir valor spinner.
-        FechaCompra.updateDate(year,month-1,day);//definir valor del datepicker con los valores del main.
-
-        ///////////////////////////////////////////////////////////////////////////////////
+        FechaCompra.updateDate(year,month-1,day);//Actualizacion del valor de DatePicker con los valores provenientes del elemento a modificar desde el listView
 
         contactImageImgView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,11 +177,6 @@ public class editActivity extends Activity {
             }
 
         });
-
-       /* if (imagen!=null){
-            imageUri= Uri.parse(imagen);
-        }*/
-
         contactImageImgView.setImageURI(imageUri);
     }
 

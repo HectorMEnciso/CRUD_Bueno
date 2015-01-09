@@ -3,6 +3,7 @@ package com.example.hector.crud;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -27,49 +28,47 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends Activity implements SearchView.OnQueryTextListener {
-    private SearchView mSearchView;//////////////////////
-    private ListView LstOpciones;
-    adaptadorCoches adaptador;
-    private ArrayList<Coches> datos = new ArrayList<Coches>();
-    int posi,x;
-
+    private SearchView mSearchView; //Declaracion global del SearchView sSearchView
+    private ListView LstOpciones; //Declaracion GLobal del listView LstOpciones.
+    adaptadorCoches adaptador; //Declaracion global del adapdatorCoches adaptador.
+    private ArrayList<Coches> datos = new ArrayList<Coches>();//Declaracion global del ArrayList<Coches> datos.
+    int posi,x; //Variables globales para las posiciones.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        adaptador = new adaptadorCoches(this, datos);
-        LstOpciones = (ListView) findViewById(R.id.LstOpciones);
-        LstOpciones.setAdapter(adaptador);
-        //enables filtering for the contents of the given ListView
-        LstOpciones.setTextFilterEnabled(true);
-        registerForContextMenu(LstOpciones);
-        mSearchView = (SearchView) findViewById(R.id.searchView1);////////////////////
-        mSearchView.setBackgroundColor(Color.LTGRAY);
-        LstOpciones.setTextFilterEnabled(true);////////////////
-        setupSearchView();///////////////////
-        LstOpciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        setContentView(R.layout.activity_main);//Cargamos layout
+        adaptador = new adaptadorCoches(this, datos);//Instanciación del adaptador al que le pasamos el arralist con los datos datos.
+        LstOpciones = (ListView) findViewById(R.id.LstOpciones);//Obtenemos la referencia al listView
+        LstOpciones.setAdapter(adaptador);//añadimos el adaptador al listView LstOpciones.
+        LstOpciones.setTextFilterEnabled(true);//Habilitamos la busqueda en el listView LstOpciones
+        registerForContextMenu(LstOpciones);//Asociamos el menu contextual al listView LstOpciones
+        mSearchView = (SearchView) findViewById(R.id.searchView1);//Obtenemos la referencia al SearchView mSearchView
+        mSearchView.setBackgroundColor(Color.LTGRAY);//Color de fondo para el SearchView mSearchView
+        setupSearchView();//Llamada al metodo
+        LstOpciones.setOnItemClickListener(new AdapterView.OnItemClickListener() { //Escuchador para cada fila del listView
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Intent data = new Intent(MainActivity.this, editActivity.class);
-                TextView matricula=(TextView) v.findViewById(R.id.lblMatricula);
-                String m= matricula.getText().toString();
-                for(int k=0;k<datos.size();k++) {
-                    if (datos.get(k).getMatricula().toString().equalsIgnoreCase(m)) {
-                       x=k;
+                Intent data = new Intent(MainActivity.this, editActivity.class);//Intent explicito a editActivity
+                TextView matricula=(TextView) v.findViewById(R.id.lblMatricula);//Obtenemos la referencia al listView TextView lblMatricula
+                String m= matricula.getText().toString();//Almacenamos el texto de lblMatricula
+                for(int k=0;k<datos.size();k++) {//Recorremos el ArrayList<Coches> datos
+                    if (datos.get(k).getMatricula().toString().equalsIgnoreCase(m)) {//Para cada elemento comparamos cada matricula
+                       x=k;//Guardamos aquella posicion cuyo elemento coincida.
                     }
                 }
+                /*
+                Pasamos todos los datos del elemento al editActivity
+                 */
                 data.putExtra("Matricula", datos.get(x).getMatricula().toString());
                 data.putExtra("Marca", datos.get(x).getMarca().toString());
                 data.putExtra("Modelo", datos.get(x).getModelo().toString());
-                data.putExtra("Motorizacion", datos.get(x).getMotorizacion().toString());//PASAR VALOR AL SPINNER DE EDIT
+                data.putExtra("Motorizacion", datos.get(x).getMotorizacion().toString());
                 data.putExtra("Cilindrada", datos.get(x).getCilindrada());
-                data.putExtra("Fecha", datos.get(x).getFechaCompra().toString());//PASAR FECHA AL DATEPICKER DE EDIT ACTIVITY
+                data.putExtra("Fecha", datos.get(x).getFechaCompra().toString());
                 data.putExtra("Imagen", datos.get(x).getImageURI().toString());
                 data.putExtra("Position", x);//mando la posicion correcta del elemento buscado.
                 Log.e("posClick",String.valueOf(x));
                 startActivityForResult(data, 2);
-
-
                 /*data.putExtra("Matricula", datos.get(position).getMatricula().toString());
                 data.putExtra("Marca", datos.get(position).getMarca().toString());
                 data.putExtra("Modelo", datos.get(position).getModelo().toString());
@@ -84,10 +83,10 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     }
 
     private void setupSearchView() {
-        mSearchView.setIconifiedByDefault(false);
-        mSearchView.setOnQueryTextListener(this);
-        mSearchView.setSubmitButtonEnabled(true);
-        mSearchView.setQueryHint("Introduzca matricula....");
+        mSearchView.setIconifiedByDefault(false); //Define el estado del campo de busqueda.
+        mSearchView.setOnQueryTextListener(this);//Define un escuchador para para las acciones dentro del searchView
+        mSearchView.setSubmitButtonEnabled(true);//Habilita el boton Submit cuando no esta vacia.
+        mSearchView.setQueryHint("Introduzca matricula....");//Texto a mostrar.
     }
     @Override
     public boolean onQueryTextChange(String newText) {
@@ -114,12 +113,13 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         super.onCreateContextMenu(menu, v, menuInfo);
 
         MenuInflater inflater = getMenuInflater();
-
+        TextView matricula=(TextView) v.findViewById(R.id.lblMatricula);
         if (v.getId() == R.id.LstOpciones) {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 
-            menu.setHeaderTitle(LstOpciones.getAdapter().getItem(info.position).toString());
-
+            //menu.setHeaderTitle(LstOpciones.getAdapter().getItem(info.position).toString());
+            menu.setHeaderTitle(datos.get(info.position).getMatricula());
+            //menu.setHeaderIcon(R.drawable.car);
             inflater.inflate(R.menu.opciones_elementos, menu);
         }
     }
@@ -129,9 +129,10 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         switch (item.getItemId()) {
             case R.id.EliminarSeleccionada:
                 posi = info.position;
-                Toast.makeText(getBaseContext(), datos.get(posi).getMatricula(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getBaseContext(), datos.get(posi).getMarca(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getBaseContext(), datos.get(posi).getModelo(), Toast.LENGTH_SHORT).show();
+                String dataCarDelete="¡COCHE ELIMINADO!\n";
+                dataCarDelete=dataCarDelete+"MATRICULA:"+datos.get(posi).getMatricula()+"\nMARCA: "+datos.get(posi).getMarca()+"\nMODELO: "+datos.get(posi).getModelo();
+                Toast.makeText(getBaseContext(),dataCarDelete, Toast.LENGTH_LONG).show();
+                dataCarDelete="";
                 adaptador.delCoches(datos, posi);
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
                 return true;
