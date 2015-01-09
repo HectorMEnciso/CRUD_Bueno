@@ -30,7 +30,7 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
         this.context = context;
        this.co = c;
     }
-    public void addCoche(String Matricula, String Marca, String Modelo, String Motorizacion, String Cilindrada, String FechaCompra, Uri ImageUri) {
+    public void addCoche(String Matricula, String Marca, String Modelo, String Motorizacion, String Cilindrada, String FechaCompra, Uri ImageUri,ArrayList<Coches> datos) {
         co.add(new Coches(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, ImageUri));
     }
     /*public void addCoches(ArrayList<Coches> c){
@@ -48,7 +48,7 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
     }
 
 
-    public void editCoche(Coches c, int posicion) {
+    public void editCoche(Coches c, int posicion,ArrayList<Coches> datos) {
         co.set(posicion, c);
     }
 
@@ -129,7 +129,7 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
                     if (orig != null && orig.size() > 0) {
                         for (final Coches g : orig) {
                             if (g.getMatricula().toLowerCase()
-                                    .contains(constraint.toString().toUpperCase()))
+                                    .contains(constraint.toString().toLowerCase()))
                                 results.add(g);
                         }
                     }

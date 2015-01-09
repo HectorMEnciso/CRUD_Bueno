@@ -169,7 +169,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 Bundle bundle = data.getExtras();
-                adaptador.addCoche(bundle.getString("Matricula"), bundle.getString("Marca"), bundle.getString("Modelo"), bundle.getString("Motorizacion"), bundle.getString("Cilindrada"), bundle.getString("FechaCompra"), Uri.parse(bundle.getString("Imagen")));
+                adaptador.addCoche(bundle.getString("Matricula"), bundle.getString("Marca"), bundle.getString("Modelo"), bundle.getString("Motorizacion"), bundle.getString("Cilindrada"), bundle.getString("FechaCompra"), Uri.parse(bundle.getString("Imagen")),datos);
                 //adaptador.addCoche(datos); No he visto como implementarlo de esta forma.
                 Toast.makeText(getBaseContext(), "Coche agredado correctamente", Toast.LENGTH_SHORT).show();
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
@@ -178,7 +178,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         if (requestCode == 2) {
             if (resultCode == RESULT_OK) {
                 Bundle bundle = data.getExtras();
-                adaptador.editCoche(new Coches(bundle.getString("Matricula"), bundle.getString("Marca"), bundle.getString("Modelo"), bundle.getString("Motorizacion"), bundle.getString("Cilindrada"), bundle.getString("FechaCompra"), Uri.parse(bundle.getString("Imagen"))), bundle.getInt("Position"));
+                adaptador.editCoche(new Coches(bundle.getString("Matricula"), bundle.getString("Marca"), bundle.getString("Modelo"), bundle.getString("Motorizacion"), bundle.getString("Cilindrada"), bundle.getString("FechaCompra"), Uri.parse(bundle.getString("Imagen"))), bundle.getInt("Position"),datos);
                Log.e("possssssssssssss",String.valueOf(bundle.getInt("Position")));
                 Toast.makeText(getBaseContext(), "Coche modificado correctamente", Toast.LENGTH_SHORT).show();
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
@@ -231,8 +231,8 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 Cilindrada = fin.readLine();
                 FechaCompra = fin.readLine();
                 Imagen = fin.readLine();
-                adaptador.addCoche(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, Uri.parse(Imagen));
-               //adaptador.addCoche(datos); No he visto como implementarlo de esta forma.
+               // adaptador.addCoche(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, Uri.parse(Imagen));
+               adaptador.addCoche(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, Uri.parse(Imagen),datos);
             }
             adaptador.notifyDataSetChanged();//Refresca adaptador.
         } catch (Exception e) {

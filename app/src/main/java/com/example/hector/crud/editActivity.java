@@ -38,6 +38,7 @@ public class editActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_coches);
+        contactImageImgView=(ImageView)findViewById(R.id.imgViewContactImage);
     }
 
     public void onClick(View v){
@@ -112,7 +113,7 @@ public class editActivity extends Activity {
         Modelo = (EditText) findViewById(R.id.entradaModelo);
         Cilindrada=(EditText)findViewById(R.id.entradaCilindrada);
         FechaCompra=(DatePicker)findViewById(R.id.datePicker);
-        contactImageImgView=(ImageView)findViewById(R.id.imgViewContactImage);
+       contactImageImgView=(ImageView)findViewById(R.id.imgViewContactImage);
         moto=getIntent().getStringExtra("Motorizacion");
         switch (moto){
             case "Gasolina":
@@ -136,7 +137,8 @@ public class editActivity extends Activity {
             entroGaleria=false;
         }
 
-        //position=getIntent().getIntExtra("Position",0);
+        position=getIntent().getIntExtra("Position",0);
+        Log.e("posicionEdit",String.valueOf(position));
         Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
         ArrayAdapter<String> adap=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,datos);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
