@@ -132,7 +132,7 @@
                         android:layout_gravity="center"
                         android:background="@drawable/estilos_botones"
                         android:onClick="onClick"
-                        android:text="Añadir" />
+                        android:text="Modificar" />
 
                     <Button
                         android:id="@+id/btnCancelar"

@@ -20,11 +20,11 @@ import java.util.ArrayList;
  */
 public class adaptadorCoches extends BaseAdapter implements Filterable {
 
-    public ArrayList<Coches> orig;
-    Context context;
-    ArrayList<Coches> co;
+    public ArrayList<Coches> orig; //ArrayList de coches para la busqueda.
+    Context context; //Variable global context (desde la que se crea el adaptador)
+    ArrayList<Coches> co; //ArrayList de coches original
 
-    adaptadorCoches(Activity context, ArrayList<Coches> c) {
+    adaptadorCoches(Activity context, ArrayList<Coches> c) {//Constructor
        super();
        this.context = context;
        this.co = c;
@@ -32,7 +32,14 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
     public void addCoche(String Matricula, String Marca, String Modelo, String Motorizacion, String Cilindrada, String FechaCompra, Uri ImageUri,ArrayList<Coches> c) {
         c.add(new Coches(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, ImageUri));
     }
-    private class ViewHolder {
+
+    /*Optimización de listas
+        aporta agilidad y menor consumo de bateria.
+        /////////////////////////////////////////////////////////////////////////////////
+        La clase ViewHolder tan sólo va a contener una
+        referencia a cada uno de los controles que tengamos que manipular de nuestro layout
+     */
+    private class ViewHolder { //Metodo para la optimizacion
         ImageView fot;
         TextView mat;
         TextView mar;
@@ -53,8 +60,13 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
     public void deleteAll(ArrayList<Coches> c) {
         c.clear();
     }
-
+/*
+ahorrarnos el trabajo de inflar el layout definido cada vez que se muestra un nuevo elemento
+ */
     public View getView(int position, View convertView, ViewGroup parent) {
+        /*
+        convertView --> recibe layout que puedan ser reutilizados.
+         */
         ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.mi_layout, parent, false);
@@ -66,6 +78,11 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
             holder.cili = (TextView) convertView.findViewById(R.id.lblCilindrada);
             holder.mot = (TextView) convertView.findViewById(R.id.lblMotorizacion);
             holder.fec = (TextView) convertView.findViewById(R.id.lblFechaCompra);
+            /*
+            propiedad  Tag (podemos
+            asignarla y recuperarla mediante los métodos setTag() y getTag() respectivamente) que puede
+            contener cualquier tipo de objeto
+             */
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
