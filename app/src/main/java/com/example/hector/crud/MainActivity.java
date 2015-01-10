@@ -117,7 +117,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         if (v.getId() == R.id.LstOpciones) {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 
-            menu.setHeaderTitle(datos.get(info.position).getMatricula());
+            menu.setHeaderTitle("SE BORRARÁ EL VEHICULO CON MATRÍCULA: "+datos.get(info.position).getMatricula());
 
             inflater.inflate(R.menu.opciones_elementos, menu);
         }
