@@ -95,28 +95,6 @@ ahorrarnos el trabajo de inflar el layout definido cada vez que se muestra un nu
         holder.cili.setText(co.get(position).getCilindrada());
         holder.fec.setText(co.get(position).getFechaCompra());
         return convertView;
-
-      /* ImageView ivContactImage = (ImageView) item.findViewById(R.id.ivContactImage);
-        ivContactImage.setImageURI(co.get(position).getImageURI());
-
-        TextView mat = (TextView)item.findViewById(R.id.lblMatricula);
-        mat.setText(co.get(position).getMatricula());
-
-        TextView mar =(TextView)item.findViewById(R.id.lblMarca);
-        mar.setText(co.get(position).getMarca());
-
-        TextView model =(TextView)item.findViewById(R.id.lblModelo);
-        model.setText(co.get(position).getModelo());
-
-        TextView mo =(TextView)item.findViewById(R.id.lblMotorizacion);
-        mo.setText(co.get(position).getMotorizacion());
-
-        TextView ci =(TextView)item.findViewById(R.id.lblCilindrada);
-        ci.setText(co.get(position).getCilindrada());
-
-        TextView FechaCompra =(TextView)item.findViewById(R.id.lblFechaCompra);
-        FechaCompra.setText(co.get(position).getFechaCompra());
-        return(item);*/
     }
     public Filter getFilter() {
         return new Filter() {

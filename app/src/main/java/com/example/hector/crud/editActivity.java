@@ -21,7 +21,7 @@ import android.widget.Toast;
  * Created by Hector on 28/12/2014.
  */
 public class editActivity extends Activity {
-    final String[] datos=new String[]{"Gasolina","Diesel","Hibrido"};
+    final String[] datos=new String[]{"GASOLINA","DIESEL","HIBRIDO"};
     private EditText Matricula;
     private EditText Marca;
     private EditText Modelo;
@@ -115,14 +115,15 @@ public class editActivity extends Activity {
         FechaCompra=(DatePicker)findViewById(R.id.datePicker);
        contactImageImgView=(ImageView)findViewById(R.id.imgViewContactImage);
         moto=getIntent().getStringExtra("Motorizacion");
+        Log.e("MOTO",moto);
         switch (moto){
-            case "Gasolina":
+            case "GASOLINA":
                 posMoto=0;
                 break;
-            case "Diesel":
+            case "DIESEL":
                 posMoto=1;
                 break;
-            case "Hibrido":
+            case "HIBRIDO":
                 posMoto=2;
                 break;
         }
@@ -136,9 +137,6 @@ public class editActivity extends Activity {
             imageUri = Uri.parse(getIntent().getStringExtra("Imagen"));
             entroGaleria=false;
         }
-
-        //position=getIntent().getIntExtra("Position",0);
-        Log.e("posicionEdit",String.valueOf(position));
         Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
         ArrayAdapter<String> adap=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,datos);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
