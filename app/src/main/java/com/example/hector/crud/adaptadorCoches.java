@@ -29,8 +29,14 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
        this.context = context;
        this.co = c;
     }
+    public void UpdateAdaptador(ArrayList<Coches> a){
+        this.co=a;
+        this.co=new ArrayList<Coches>();
+        this.co.addAll(a);
+    }
     public void addCoche(String Matricula, String Marca, String Modelo, String Motorizacion, String Cilindrada, String FechaCompra, Uri ImageUri,ArrayList<Coches> c) {
         c.add(new Coches(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, ImageUri));
+        UpdateAdaptador(c);
     }
 
     /*Optimización de listas
@@ -55,6 +61,7 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
 
     public void delCoches(ArrayList<Coches> c, int posi) {
         c.remove(posi);//Borra Coches selecionada
+        UpdateAdaptador(c);
     }
 
     public void deleteAll(ArrayList<Coches> c) {
