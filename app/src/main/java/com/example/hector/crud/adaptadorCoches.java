@@ -12,6 +12,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -94,8 +95,15 @@ ahorrarnos el trabajo de inflar el layout definido cada vez que se muestra un nu
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        //carvar oor defeco
-        holder.fot.setImageURI(co.get(position).getImageURI());
+        if(co.get(position).getImageURI().toString().equals("android.resource://com.example.hector.crud/drawable/car.png")){
+            holder.fot.setImageResource(R.drawable.car);
+               Log.e("fotoooooooooooIF",co.get(position).getImageURI().toString());
+        }
+        else{
+            holder.fot.setImageURI(co.get(position).getImageURI());
+            Log.e("fotoooooooooooElse",co.get(position).getImageURI().toString());
+        }
+
         holder.mat.setText(co.get(position).getMatricula());
         holder.mar.setText(co.get(position).getMarca());
         holder.mod.setText(co.get(position).getModelo());
