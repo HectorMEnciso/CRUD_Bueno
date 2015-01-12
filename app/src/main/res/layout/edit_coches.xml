@@ -14,10 +14,8 @@
                 android:layout_height="150dp"
                 android:id="@+id/imgViewContactImage"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/car"
-
                 android:layout_marginTop="10dp"/>
-           <!-- android:background="@drawable/estilos_imageview"-->
+
             <TextView
                 android:id="@+id/lblMatricula"
                 android:textAppearance="?android:attr/textAppearanceMedium"

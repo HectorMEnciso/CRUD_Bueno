@@ -130,6 +130,11 @@ public class editActivity extends Activity {
         marca=getIntent().getStringExtra("Marca");
         modelo=getIntent().getStringExtra("Modelo");
         cilindrada=getIntent().getStringExtra("Cilindrada");
+        Log.e("vaaaaaaaaaalor",imageUri.toString());
+
+        if(imageUri.equals("android.resource://com.example.hector.crud/drawable/car.png")){
+            contactImageImgView.setImageResource(R.drawable.car);
+        }
 
         if(!entroGaleria) {
             imageUri = Uri.parse(getIntent().getStringExtra("Imagen"));
