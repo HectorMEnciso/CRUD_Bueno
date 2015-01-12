@@ -38,7 +38,6 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
         c.add(new Coches(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, ImageUri));
         UpdateAdaptador(c);
     }
-
     /*Optimización de listas
         aporta agilidad y menor consumo de bateria.
         /////////////////////////////////////////////////////////////////////////////////
