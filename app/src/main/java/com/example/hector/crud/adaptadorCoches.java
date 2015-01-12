@@ -12,7 +12,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,7 +20,7 @@ import java.util.ArrayList;
  */
 public class adaptadorCoches extends BaseAdapter implements Filterable {
 
-    public ArrayList<Coches> orig; //ArrayList de coches para la busqueda.
+    public ArrayList<Coches> coBusq; //ArrayList de coches para la busqueda.
     Context context; //Variable global context (desde la que se crea el adaptador)
     ArrayList<Coches> co; //ArrayList de coches original
 
@@ -115,11 +114,11 @@ ahorrarnos el trabajo de inflar el layout definido cada vez que se muestra un nu
             protected Filter.FilterResults performFiltering(CharSequence constraint) {
                 final FilterResults oReturn = new FilterResults();
                 final ArrayList<Coches> results = new ArrayList<Coches>();
-                if (orig == null)
-                    orig = co;
+                if (coBusq == null)
+                    coBusq = co;
                 if (constraint != null) {
-                    if (orig != null && orig.size() > 0) {
-                        for (final Coches g : orig) {
+                    if (coBusq != null && coBusq.size() > 0) {
+                        for (final Coches g : coBusq) {
                             if (g.getMatricula().toLowerCase()
                                     .contains(constraint.toString().toLowerCase()))
                                 results.add(g);
