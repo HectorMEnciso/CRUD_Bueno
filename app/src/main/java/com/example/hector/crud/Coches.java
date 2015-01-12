@@ -84,6 +84,4 @@ public class Coches {
     public String toString() {
         return (getMatricula() + "\n" + getMarca() + "\n" + getModelo() + "\n" + getMotorizacion() +"\n"+ getCilindrada() + "\n" + getFechaCompra()+ "\n" + getImageURI());
     }
-
-
 }
