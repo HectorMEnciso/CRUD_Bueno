@@ -104,8 +104,6 @@ public class editActivity extends Activity {
     }
 
     public void onResume() {
-
-        Toast.makeText(getBaseContext(),"Entro onResume()", Toast.LENGTH_LONG);
         super.onResume();
         String matricula,marca,modelo,cilindrada,imagen,moto,fecha;
         Matricula = (EditText) findViewById(R.id.entradaMatricula);

@@ -171,6 +171,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 Bundle bundle = data.getExtras();
                 adaptador.addCoche(bundle.getString("Matricula"), bundle.getString("Marca"), bundle.getString("Modelo"), bundle.getString("Motorizacion"), bundle.getString("Cilindrada"), bundle.getString("FechaCompra"), Uri.parse(bundle.getString("Imagen")),datos);
                 //adaptador.addCoche(datos); No he visto como implementarlo de esta forma.
+
                 Toast.makeText(getBaseContext(), "Coche agredado correctamente", Toast.LENGTH_SHORT).show();
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
             }
@@ -181,8 +182,9 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 adaptador.editCoche(new Coches(bundle.getString("Matricula"), bundle.getString("Marca"), bundle.getString("Modelo"), bundle.getString("Motorizacion"), bundle.getString("Cilindrada"), bundle.getString("FechaCompra"), Uri.parse(bundle.getString("Imagen"))), bundle.getInt("Position"),datos);
                Log.e("possssssssssssss",String.valueOf(bundle.getInt("Position")));
                 Toast.makeText(getBaseContext(), "Coche modificado correctamente", Toast.LENGTH_SHORT).show();
-                adaptador.notifyDataSetChanged();//Refresca adaptador.
+
                 adaptador.UpdateAdaptador(datos);
+                adaptador.notifyDataSetChanged();//Refresca adaptador.
             }
         }
     }
