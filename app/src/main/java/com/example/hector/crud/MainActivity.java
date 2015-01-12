@@ -183,8 +183,11 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                Log.e("possssssssssssss",String.valueOf(bundle.getInt("Position")));
                 Toast.makeText(getBaseContext(), "Coche modificado correctamente", Toast.LENGTH_SHORT).show();
 
-                adaptador.UpdateAdaptador(datos);
+                mSearchView.setQuery("",false);//Borra Texto lista
+                mSearchView.clearFocus();//pierde el foco de la lista.
+                //adaptador.UpdateAdaptador(datos);
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
+
             }
         }
     }

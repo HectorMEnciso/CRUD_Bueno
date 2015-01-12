@@ -56,6 +56,7 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
 
     public void editCoche(Coches c, int posicion,ArrayList<Coches> d) {
         d.set(posicion, c);
+        UpdateAdaptador(d);
     }
 
     public void delCoches(ArrayList<Coches> c, int posi) {
@@ -127,7 +128,9 @@ ahorrarnos el trabajo de inflar el layout definido cada vez que se muestra un nu
             protected void publishResults(CharSequence constraint,FilterResults results) {
                 co = (ArrayList<Coches>) results.values;
                 Log.e("numeroElementos",String.valueOf(co.size()));
+                UpdateAdaptador(co);
                 notifyDataSetChanged();
+
             }
         };
     }
