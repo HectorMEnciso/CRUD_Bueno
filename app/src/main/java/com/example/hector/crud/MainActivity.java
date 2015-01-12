@@ -69,15 +69,6 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 data.putExtra("Position", x);//mando la posicion correcta del elemento buscado.
                 Log.e("posClick",String.valueOf(x));
                 startActivityForResult(data, 2);
-                /*data.putExtra("Matricula", datos.get(position).getMatricula().toString());
-                data.putExtra("Marca", datos.get(position).getMarca().toString());
-                data.putExtra("Modelo", datos.get(position).getModelo().toString());
-                data.putExtra("Motorizacion", datos.get(position).getMotorizacion().toString());//PASAR VALOR AL SPINNER DE EDIT
-                data.putExtra("Cilindrada", datos.get(position).getCilindrada());
-                data.putExtra("Fecha", datos.get(position).getFechaCompra().toString());//PASAR FECHA AL DATEPICKER DE EDIT ACTIVITY
-                data.putExtra("Imagen", datos.get(position).getImageURI().toString());
-                data.putExtra("Position", position);
-                startActivityForResult(data, 2);*/
             }
         });
     }
