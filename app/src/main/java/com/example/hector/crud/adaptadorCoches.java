@@ -94,6 +94,7 @@ ahorrarnos el trabajo de inflar el layout definido cada vez que se muestra un nu
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        //carvar oor defeco
         holder.fot.setImageURI(co.get(position).getImageURI());
         holder.mat.setText(co.get(position).getMatricula());
         holder.mar.setText(co.get(position).getMarca());
