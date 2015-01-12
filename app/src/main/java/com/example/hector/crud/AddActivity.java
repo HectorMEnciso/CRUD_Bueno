@@ -49,24 +49,23 @@ public class AddActivity extends Activity {
         reset=(Button)findViewById(R.id.btnReset);
         Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
         FechaCompra=(DatePicker)findViewById(R.id.datePicker);
+        reset=(Button)findViewById(R.id.btnReset);
+        contactImageImgView = (ImageView) findViewById(R.id.imgViewContactImage);
         ArrayAdapter<String> adap=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,datos);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Motorizacion.setPrompt("SELECCIONE MOTORIZACIÓN");//no funciona
         Motorizacion.setAdapter(adap);
+
         Motorizacion.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(AdapterView<?> parent,
                                                android.view.View v, int position, long id) {
 
-                        opnSpinner=datos[position].toString();//paso el elemento mediante objeto bundle.
+                        opnSpinner=datos[position].toString();
                     }
                     public void onNothingSelected(AdapterView<?> parent) {
 
                     }
                 });
-
-        contactImageImgView = (ImageView) findViewById(R.id.imgViewContactImage);
-
         contactImageImgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,8 +77,6 @@ public class AddActivity extends Activity {
 
         });
     }
-
-
     public void onActivityResult(int reqCode, int resCode, Intent data) {
         if (resCode == RESULT_OK) {
             if (reqCode == 1) {
@@ -92,7 +89,6 @@ public class AddActivity extends Activity {
     public void onClick(View v){
         Intent data = new Intent();
         Bundle b= new Bundle();
-
         int dia,mes,anno;
         dia=FechaCompra.getDayOfMonth();
         mes=FechaCompra.getMonth()+1;
@@ -107,13 +103,11 @@ public class AddActivity extends Activity {
         b.putString("FechaCompra",fecha.toString());
         data.putExtras(b);
         setResult(RESULT_OK, data);
-        //---closes the activity---
         finish();
     }
     public void onClickCancelar(View v){
         finish();
     }
-
 public void onClickReset(View v){
     contactImageImgView.setImageResource(R.drawable.car);
     Matricula.setText("");
