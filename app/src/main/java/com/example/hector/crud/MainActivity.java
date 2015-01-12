@@ -3,7 +3,6 @@ package com.example.hector.crud;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,7 +28,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity implements SearchView.OnQueryTextListener {
     private SearchView mSearchView; //Declaracion global del SearchView sSearchView
-    private ListView LstOpciones; //Declaracion GLobal del listView LstOpciones.
+    private ListView lstCoches; //Declaracion GLobal del listView lstCoches.
     adaptadorCoches adaptador; //Declaracion global del adapdatorCoches adaptador.
     private ArrayList<Coches> datos = new ArrayList<Coches>();//Declaracion global del ArrayList<Coches> datos.
     int posi,x; //Variables globales para las posiciones.
@@ -38,22 +37,22 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);//Cargamos layout
         adaptador = new adaptadorCoches(this, datos);//Instanciación del adaptador al que le pasamos el arralist con los datos datos.
-        LstOpciones = (ListView) findViewById(R.id.LstOpciones);//Obtenemos la referencia al listView
-        LstOpciones.setAdapter(adaptador);//añadimos el adaptador al listView LstOpciones.
-        LstOpciones.setTextFilterEnabled(true);//Habilitamos la busqueda en el listView LstOpciones
-        registerForContextMenu(LstOpciones);//Asociamos el menu contextual al listView LstOpciones
+        lstCoches = (ListView) findViewById(R.id.LstOpciones);//Obtenemos la referencia al listView
+        lstCoches.setAdapter(adaptador);//añadimos el adaptador al listView lstCoches.
+        lstCoches.setTextFilterEnabled(true);//Habilitamos la busqueda en el listView lstCoches
+        registerForContextMenu(lstCoches);//Asociamos el menu contextual al listView lstCoches
         mSearchView = (SearchView) findViewById(R.id.searchView1);//Obtenemos la referencia al SearchView mSearchView
         mSearchView.setBackgroundColor(Color.LTGRAY);//Color de fondo para el SearchView mSearchView
         setupSearchView();//Llamada al metodo
-        LstOpciones.setOnItemClickListener(new AdapterView.OnItemClickListener() { //Escuchador para cada fila del listView
+        lstCoches.setOnItemClickListener(new AdapterView.OnItemClickListener() { //Escuchador para cada fila del listView
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Intent data = new Intent(MainActivity.this, editActivity.class);//Intent explicito a editActivity
-                TextView matricula=(TextView) v.findViewById(R.id.lblMatricula);//Obtenemos la referencia al listView TextView lblMatricula
-                String m= matricula.getText().toString();//Almacenamos el texto de lblMatricula
-                for(int k=0;k<datos.size();k++) {//Recorremos el ArrayList<Coches> datos
+                TextView matricula = (TextView) v.findViewById(R.id.lblMatricula);//Obtenemos la referencia al listView TextView lblMatricula
+                String m = matricula.getText().toString();//Almacenamos el texto de lblMatricula
+                for (int k = 0; k < datos.size(); k++) {//Recorremos el ArrayList<Coches> datos
                     if (datos.get(k).getMatricula().toString().equalsIgnoreCase(m)) {//Para cada elemento comparamos cada matricula
-                       x=k;//Guardamos aquella posicion cuyo elemento coincida.
+                        x = k;//Guardamos aquella posicion cuyo elemento coincida.
                     }
                 }
                 /*
@@ -67,7 +66,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 data.putExtra("Fecha", datos.get(x).getFechaCompra().toString());
                 data.putExtra("Imagen", datos.get(x).getImageURI().toString());
                 data.putExtra("Position", x);//mando la posicion correcta del elemento buscado.
-                Log.e("posClick",String.valueOf(x));
+                Log.e("posClick", String.valueOf(x));
                 startActivityForResult(data, 2);
             }
         });
@@ -83,9 +82,9 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     public boolean onQueryTextChange(String newText) {
 
         if (TextUtils.isEmpty(newText)) {
-            LstOpciones.clearTextFilter();
+            lstCoches.clearTextFilter();
         } else {
-            LstOpciones.setFilterText(newText);
+            lstCoches.setFilterText(newText);
         }
         return true;
     }

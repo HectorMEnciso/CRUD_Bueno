@@ -31,7 +31,7 @@ public class editActivity extends Activity {
     private String opnSpinner;
     boolean entroGaleria=false;
     int position;
-    Uri imageUri = Uri.parse("android.resource://com.example.hector.crud/drawable/no_moto.png");
+    Uri imageUri = Uri.parse("android.resource://com.example.hector.crud/drawable/car.png");
     ImageView contactImageImgView;
     int posMoto;
     @Override
