@@ -144,6 +144,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
             case R.id.BorrarTodas:
                 adaptador.deleteAll(datos);
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
+                adaptador.UpdateAdaptador(datos);
                 return true;
             case R.id.GuardarFichero:
                 saveCoches(datos);
