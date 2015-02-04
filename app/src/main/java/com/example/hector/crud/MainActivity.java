@@ -139,7 +139,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 return true;
             case R.id.AnadirCoche:
                 Intent in = new Intent(this, AddActivity.class);
-                startActivityForResult(in, 1);
+                startActivityForResult(in, 10);
                 return true;
             case R.id.BorrarTodas:
                 adaptador.deleteAll(datos);
