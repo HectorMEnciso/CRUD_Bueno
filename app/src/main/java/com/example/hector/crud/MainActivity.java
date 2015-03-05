@@ -24,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class MainActivity extends Activity implements SearchView.OnQueryTextListener {
@@ -32,10 +33,13 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     adaptadorCoches adaptador; //Declaracion global del adapdatorCoches adaptador.
     private ArrayList<Coches> datos = new ArrayList<Coches>();//Declaracion global del ArrayList<Coches> datos.
     int posi,x; //Variables globales para las posiciones.
+    DBController controller = new DBController(this);
+    ArrayList<HashMap<String, String>> cochesList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);//Cargamos layout
+        cochesList =  controller.getAllCoches();
         adaptador = new adaptadorCoches(this, datos);//Instanciación del adaptador al que le pasamos el arralist con los datos datos.
         lstCoches = (ListView) findViewById(R.id.LstOpciones);//Obtenemos la referencia al listView
         lstCoches.setAdapter(adaptador);//añadimos el adaptador al listView lstCoches.
