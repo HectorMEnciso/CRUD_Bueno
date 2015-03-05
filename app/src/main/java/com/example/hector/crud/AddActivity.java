@@ -19,6 +19,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 /**
  * Created by Hector on 28/12/2014.
@@ -36,6 +37,7 @@ public class AddActivity extends Activity {
     private String opnSpinner;
     ImageView contactImageImgView;
     Uri imageUri=Uri.parse("android.resource://com.example.hector.crud/drawable/car.png");
+    DBController controller = new DBController(this);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,10 @@ public class AddActivity extends Activity {
 
         });
     }
+    public void callHomeActivity(View view) {
+        Intent objIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(objIntent);
+    }
     public void onActivityResult(int reqCode, int resCode, Intent data) {
         if (resCode == RESULT_OK) {
             if (reqCode == 1) {
@@ -87,7 +93,22 @@ public class AddActivity extends Activity {
         }
     }
     public void onClick(View v){
-        Intent data = new Intent();
+        int dia,mes,anno;
+        dia=FechaCompra.getDayOfMonth();
+        mes=FechaCompra.getMonth()+1;
+        anno=FechaCompra.getYear();
+        String fecha=dia+"/"+mes+"/"+anno;
+        HashMap<String, String> queryValues =  new  HashMap<String, String>();
+        queryValues.put("idfoto", imageUri.toString());
+        queryValues.put("matricula", Matricula.getText().toString());
+        queryValues.put("marca", Marca.getText().toString());
+        queryValues.put("modelo", Modelo.getText().toString());
+        queryValues.put("cilindrada", Cilindrada.getText().toString());
+        queryValues.put("motorizacion", opnSpinner.toString().toUpperCase());
+        queryValues.put("fechaCompra",fecha.toString());
+        controller.insertCoche(queryValues);
+        this.callHomeActivity(v);
+        /*Intent data = new Intent();
         Bundle b= new Bundle();
         int dia,mes,anno;
         dia=FechaCompra.getDayOfMonth();
@@ -103,7 +124,7 @@ public class AddActivity extends Activity {
         b.putString("FechaCompra",fecha.toString());
         data.putExtras(b);
         setResult(RESULT_OK, data);
-        finish();
+        finish();*/
     }
     public void onClickCancelar(View v){
         finish();

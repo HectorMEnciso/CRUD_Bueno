@@ -35,7 +35,7 @@ public class adaptadorCoches extends BaseAdapter implements Filterable {
         this.co.addAll(a);
     }
     public void addCoche(String Matricula, String Marca, String Modelo, String Motorizacion, String Cilindrada, String FechaCompra, Uri ImageUri,ArrayList<Coches> c) {
-        c.add(new Coches(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, ImageUri));
+        //c.add(new Coches(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, ImageUri));
         UpdateAdaptador(c);
     }
     /*Optimización de listas

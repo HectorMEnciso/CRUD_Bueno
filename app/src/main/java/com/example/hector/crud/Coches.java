@@ -6,6 +6,7 @@ import android.net.Uri;
  * Created by Hector on 28/12/2014.
  */
 public class Coches {
+    private int id;
     private String Matricula;
     private String Marca;
     private String Modelo;
@@ -70,8 +71,12 @@ public class Coches {
         ImageURI = imageURI;
     }
 
-    public Coches(String matricula, String marca, String modelo, String motorizacion, String cilindrada, String fechaCompra, Uri imageURI) {
+    public int getIdentificador(){
+        return id;
+    }
 
+    public Coches(int id,String matricula, String marca, String modelo, String motorizacion, String cilindrada, String fechaCompra, Uri imageURI) {
+        this.id=id;
         Matricula = matricula;
         Marca = marca;
         Modelo = modelo;

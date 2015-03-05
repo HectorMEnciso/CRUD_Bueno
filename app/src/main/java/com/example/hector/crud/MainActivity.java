@@ -14,8 +14,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.BufferedReader;
@@ -30,17 +34,19 @@ import java.util.HashMap;
 public class MainActivity extends Activity implements SearchView.OnQueryTextListener {
     private SearchView mSearchView; //Declaracion global del SearchView sSearchView
     private ListView lstCoches; //Declaracion GLobal del listView lstCoches.
-    adaptadorCoches adaptador; //Declaracion global del adapdatorCoches adaptador.
+    //adaptadorCoches adaptador; //Declaracion global del adapdatorCoches adaptador.
     private ArrayList<Coches> datos = new ArrayList<Coches>();//Declaracion global del ArrayList<Coches> datos.
+    private TextView ID;
     int posi,x; //Variables globales para las posiciones.
     DBController controller = new DBController(this);
+    SimpleAdapter adaptador;
     ArrayList<HashMap<String, String>> cochesList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);//Cargamos layout
         cochesList =  controller.getAllCoches();
-        adaptador = new adaptadorCoches(this, datos);//Instanciación del adaptador al que le pasamos el arralist con los datos datos.
+      //  adaptador = new adaptadorCoches(this, datos);//Instanciación del adaptador al que le pasamos el arralist con los datos datos.
         lstCoches = (ListView) findViewById(R.id.LstOpciones);//Obtenemos la referencia al listView
         lstCoches.setAdapter(adaptador);//añadimos el adaptador al listView lstCoches.
         lstCoches.setTextFilterEnabled(true);//Habilitamos la busqueda en el listView lstCoches
@@ -48,32 +54,55 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         mSearchView = (SearchView) findViewById(R.id.searchView1);//Obtenemos la referencia al SearchView mSearchView
         mSearchView.setBackgroundColor(Color.LTGRAY);//Color de fondo para el SearchView mSearchView
         setupSearchView();//Llamada al metodo
-        lstCoches.setOnItemClickListener(new AdapterView.OnItemClickListener() { //Escuchador para cada fila del listView
-            @Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Intent data = new Intent(MainActivity.this, editActivity.class);//Intent explicito a editActivity
-                TextView matricula = (TextView) v.findViewById(R.id.lblMatricula);//Obtenemos la referencia al listView TextView lblMatricula
-                String m = matricula.getText().toString();//Almacenamos el texto de lblMatricula
-                for (int k = 0; k < datos.size(); k++) {//Recorremos el ArrayList<Coches> datos
-                    if (datos.get(k).getMatricula().toString().equalsIgnoreCase(m)) {//Para cada elemento comparamos cada matricula
-                        x = k;//Guardamos aquella posicion cuyo elemento coincida.
+        ID=(TextView) findViewById(R.id.ID);
+        if(cochesList.size()!=0) {
+            lstCoches.setOnItemClickListener(new AdapterView.OnItemClickListener() { //Escuchador para cada fila del listView
+                @Override
+                public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                    ID=(TextView) v.findViewById(R.id.ID);
+                    Intent data = new Intent(MainActivity.this, editActivity.class);//Intent explicito a editActivity
+                    ImageView contactImageImgView=(ImageView)findViewById(R.id.imgViewContactImage);
+                    TextView matricula = (TextView) v.findViewById(R.id.lblMatricula);//Obtenemos la referencia al listView TextView lblMatricula
+                    TextView marca = (TextView) v.findViewById(R.id.lblMarca);
+                    TextView modelo = (TextView) v.findViewById(R.id.lblModelo);
+                    TextView motorizacion = (TextView) v.findViewById(R.id.lblMotorizacion);
+                    TextView cilindrada = (TextView) v.findViewById(R.id.lblCilindrada);
+                    TextView fechaCompra = (TextView) v.findViewById(R.id.lblFechaCompra);
+                   String m = matricula.getText().toString();//Almacenamos el texto de lblMatricula
+                    /*objIndent = new Intent(getApplicationContext(),editActivity.class);
+                    objIndent.putExtra("id", ID.getText().toString());
+                    objIndent.putExtra("idfoto",contactImageImgView.getImageURI().toString());
+                    objIndent.putExtra("matricula", matricula.getText().toString());
+                    objIndent.putExtra("marca", marca.getText().toString());
+                    objIndent.putExtra("modelo", modelo.getText().toString());
+                    objIndent.putExtra("motorizacion", motorizacion.getText().toString());
+                    objIndent.putExtra("cilindrada", cilindrada.getText().toString());
+                    objIndent.putExtra("fechaCompra", fechaCompra.getText().toString());
+
+                    startActivityForResult(objIndent, 2);*/
+                    for (int k = 0; k < datos.size(); k++) {//Recorremos el ArrayList<Coches> datos
+                        if (datos.get(k).getMatricula().toString().equalsIgnoreCase(m)) {//Para cada elemento comparamos cada matricula
+                            x = k;//Guardamos aquella posicion cuyo elemento coincida.
+                        }
                     }
+
+               // Pasamos todos los datos del elemento al editActivity
+                    data.putExtra("id", String.valueOf(datos.get(x).getIdentificador()));
+                    data.putExtra("Matricula", datos.get(x).getMatricula().toString());
+                    data.putExtra("Marca", datos.get(x).getMarca().toString());
+                    data.putExtra("Modelo", datos.get(x).getModelo().toString());
+                    data.putExtra("Motorizacion", datos.get(x).getMotorizacion().toString());
+                    data.putExtra("Cilindrada", datos.get(x).getCilindrada());
+                    data.putExtra("Fecha", datos.get(x).getFechaCompra().toString());
+                    data.putExtra("Imagen", datos.get(x).getImageURI().toString());
+                    data.putExtra("Position", x);//mando la posicion correcta del elemento buscado.
+                    Log.e("posClick", String.valueOf(x));
+                    startActivityForResult(data, 2);
                 }
-                /*
-                Pasamos todos los datos del elemento al editActivity
-                 */
-                data.putExtra("Matricula", datos.get(x).getMatricula().toString());
-                data.putExtra("Marca", datos.get(x).getMarca().toString());
-                data.putExtra("Modelo", datos.get(x).getModelo().toString());
-                data.putExtra("Motorizacion", datos.get(x).getMotorizacion().toString());
-                data.putExtra("Cilindrada", datos.get(x).getCilindrada());
-                data.putExtra("Fecha", datos.get(x).getFechaCompra().toString());
-                data.putExtra("Imagen", datos.get(x).getImageURI().toString());
-                data.putExtra("Position", x);//mando la posicion correcta del elemento buscado.
-                Log.e("posClick", String.valueOf(x));
-                startActivityForResult(data, 2);
-            }
-        });
+            });
+            adaptador = new SimpleAdapter( MainActivity.this,cochesList, R.layout.mi_layout, new String[] { "id" ,"idfoto","matricula","marca","modelo","motorizacion","cilindrada","fechaCompra"}, new int[] {R.id.ID,R.id.imgViewContactImage, R.id.lblMatricula, R.id.lblMarca,R.id.lblModelo,R.id.lblMotorizacion,R.id.lblCilindrada,R.id.lblFechaCompra});
+            lstCoches.setAdapter(adaptador);
+        }
     }
 
     private void setupSearchView() {
@@ -125,8 +154,11 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 String dataCarDelete="¡COCHE ELIMINADO!\n";
                 dataCarDelete=dataCarDelete+"MATRICULA:"+datos.get(posi).getMatricula()+"\nMARCA: "+datos.get(posi).getMarca()+"\nMODELO: "+datos.get(posi).getModelo();
                 Toast.makeText(getBaseContext(),dataCarDelete, Toast.LENGTH_LONG).show();
+                String CocheId = ID.getText().toString();
+                controller.deleteCoche(CocheId);
+                cochesList.remove(posi);
                 dataCarDelete="";
-                adaptador.delCoches(datos, posi);
+                //adaptador.delCoches(datos, posi);
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
                 return true;
             default:
@@ -146,15 +178,19 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 startActivityForResult(in, 1);
                 return true;
             case R.id.BorrarTodas:
-                adaptador.deleteAll(datos);
+                controller.deleteAllCoches();
+                Intent objIntent1 = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(objIntent1);
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
-                adaptador.UpdateAdaptador(datos);
+               // adaptador.deleteAll(datos);
+                //adaptador.notifyDataSetChanged();//Refresca adaptador.
+                //adaptador.UpdateAdaptador(datos);
                 return true;
             case R.id.GuardarFichero:
-                saveCoches(datos);
+                //saveCoches(datos);
                 return true;
             case R.id.GuardarFicheroOverflow:
-                saveCoches(datos);
+                //saveCoches(datos);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -164,7 +200,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 Bundle bundle = data.getExtras();
-                adaptador.addCoche(bundle.getString("Matricula"), bundle.getString("Marca"), bundle.getString("Modelo"), bundle.getString("Motorizacion"), bundle.getString("Cilindrada"), bundle.getString("FechaCompra"), Uri.parse(bundle.getString("Imagen")),datos);
+           //     adaptador.addCoche(bundle.getString("").getString("Matricula"), bundle.getString("Marca"), bundle.getString("Modelo"), bundle.getString("Motorizacion"), bundle.getString("Cilindrada"), bundle.getString("FechaCompra"), Uri.parse(bundle.getString("Imagen")),datos);
                 //adaptador.addCoche(datos); No he visto como implementarlo de esta forma.
 
                 Toast.makeText(getBaseContext(), "Coche agredado correctamente", Toast.LENGTH_SHORT).show();
@@ -174,7 +210,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         if (requestCode == 2) {
             if (resultCode == RESULT_OK) {
                 Bundle bundle = data.getExtras();
-                adaptador.editCoche(new Coches(bundle.getString("Matricula"), bundle.getString("Marca"), bundle.getString("Modelo"), bundle.getString("Motorizacion"), bundle.getString("Cilindrada"), bundle.getString("FechaCompra"), Uri.parse(bundle.getString("Imagen"))), bundle.getInt("Position"),datos);
+              //  adaptador.editCoche(new Coches(bundle.getString("Matricula"), bundle.getString("Marca"), bundle.getString("Modelo"), bundle.getString("Motorizacion"), bundle.getString("Cilindrada"), bundle.getString("FechaCompra"), Uri.parse(bundle.getString("Imagen"))), bundle.getInt("Position"),datos);
                Log.e("possssssssssssss",String.valueOf(bundle.getInt("Position")));
                 Toast.makeText(getBaseContext(), "Coche modificado correctamente", Toast.LENGTH_SHORT).show();
 
@@ -186,7 +222,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
             }
         }
     }
-    public void onResume() {
+    /*public void onResume() {
         super.onResume();
         if (datos.isEmpty()) {//Si el arraylist esta vacio
             loadCoches();
@@ -239,5 +275,5 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         } catch (Exception e) {
             Log.e("Ficheros", "Error al leer en SD");
         }
-    }
+    }*/
 }

@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 /**
  * Created by Hector on 28/12/2014.
  */
@@ -30,7 +32,9 @@ public class editActivity extends Activity {
     private DatePicker FechaCompra;
     private String opnSpinner;
     boolean entroGaleria=false;
+    DBController controller = new DBController(this);
     int position;
+    String moto,fecha;
     Uri imageUri = Uri.parse("android.resource://com.example.hector.crud/drawable/car.png");
     ImageView contactImageImgView;
     int posMoto;
@@ -39,6 +43,36 @@ public class editActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_coches);
         contactImageImgView=(ImageView)findViewById(R.id.imgViewContactImage);
+        Intent objIntent = getIntent();
+        String id = objIntent.getStringExtra("id");
+        HashMap<String, String> CochesList = controller.getCocheInfo(id);
+
+        contactImageImgView.setImageURI(Uri.parse(CochesList.get("Imagen")));
+        Matricula.setText(CochesList.get("Matricula"));
+        Marca.setText(CochesList.get("Marca"));
+        Modelo.setText(CochesList.get("Modelo"));
+        Cilindrada.setText(CochesList.get("Cilindrada"));
+        moto=getIntent().getStringExtra("Motorizacion");
+        Log.e("MOTO",moto);
+        switch (moto){
+            case "GASOLINA":
+                posMoto=0;
+                break;
+            case "DIESEL":
+                posMoto=1;
+                break;
+            case "HIBRIDO":
+                posMoto=2;
+                break;
+        }
+        Motorizacion.setSelection(posMoto);
+        fecha=getIntent().getStringExtra("Fecha");
+        String str[] = fecha.split("/");//Vector con caracter delimitador
+        int day = Integer.parseInt(str[0]);
+        int month = Integer.parseInt(str[1]);
+        int year = Integer.parseInt(str[2]);
+
+        FechaCompra.updateDate(year,month-1,day);
     }
 
     public void onClick(View v){
@@ -48,6 +82,7 @@ public class editActivity extends Activity {
         builder1.setPositiveButton("Sí",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        HashMap<String, String> queryValues =  new  HashMap<String, String>();
                         Intent data = new Intent();
                         Matricula = (EditText) findViewById(R.id.entradaMatricula);
                         Marca = (EditText) findViewById(R.id.entradaMarca);
@@ -55,7 +90,19 @@ public class editActivity extends Activity {
                         Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
                         Cilindrada=(EditText)findViewById(R.id.entradaCilindrada);
                         FechaCompra=(DatePicker)findViewById(R.id.datePicker);
-                        int dia,mes,anno;
+                        Intent objIntent = getIntent();
+                        String CocheId = objIntent.getStringExtra("id");
+                        queryValues.put("id", CocheId);
+                        queryValues.put("idfoto", imageUri.toString());
+                        queryValues.put("matricula", Matricula.getText().toString());
+                        queryValues.put("marca", Marca.getText().toString());
+                        queryValues.put("modelo", Modelo.getText().toString());
+                        queryValues.put("cilindrada", Cilindrada.getText().toString());
+                        queryValues.put("motorizacion", opnSpinner.toString().toUpperCase());
+                        queryValues.put("fechaCompra",fecha.toString());
+
+                        controller.updateCoche(queryValues);
+                      /*int dia,mes,anno;
                         dia=FechaCompra.getDayOfMonth();
                         mes=FechaCompra.getMonth()+1;
                         anno=FechaCompra.getYear();
@@ -71,10 +118,11 @@ public class editActivity extends Activity {
                         b.putString("Cilindrada", Cilindrada.getText().toString());
                         b.putString("Motorizacion",opnSpinner.toString().toUpperCase());
                         b.putString("FechaCompra",fecha.toString());
+                        controller.updateCoche(queryValues);
                         data.putExtras(b);
                         setResult(RESULT_OK,data);
                         //---closes the activity---
-                        finish();
+                        finish();*/
                     }
                 });
         builder1.setNegativeButton("No",
