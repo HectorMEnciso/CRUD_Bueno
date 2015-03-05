@@ -49,7 +49,6 @@ public class AddActivity extends Activity {
         Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
         Cilindrada=(EditText)findViewById(R.id.entradaCilindrada);
         reset=(Button)findViewById(R.id.btnReset);
-        Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
         FechaCompra=(DatePicker)findViewById(R.id.datePicker);
         reset=(Button)findViewById(R.id.btnReset);
         contactImageImgView = (ImageView) findViewById(R.id.imgViewContactImage);
@@ -129,7 +128,7 @@ public class AddActivity extends Activity {
     public void onClickCancelar(View v){
         finish();
     }
-public void onClickReset(View v){
+    public void onClickReset(View v){
     contactImageImgView.setImageResource(R.drawable.car);
     Matricula.setText("");
     Marca.setText("");

@@ -89,7 +89,8 @@ public class DBController extends SQLiteOpenHelper {
                 map.put("id", cursor.getString(0));
                 map.put("idfoto", cursor.getString(1));
                 map.put("matricula", cursor.getString(2));
-                map.put("modelo", cursor.getString(3));
+                map.put("marca", cursor.getString(3));
+                map.put("modelo", cursor.getString(4));
                 map.put("motorizacion", cursor.getString(5));
                 map.put("cilindrada", cursor.getString(6));
                 map.put("fechaCompra", cursor.getString(7));
@@ -110,7 +111,8 @@ public class DBController extends SQLiteOpenHelper {
                 //HashMap<String, String> map = new HashMap<String, String>();
                 wordList.put("idfoto", cursor.getString(1));
                 wordList.put("matricula", cursor.getString(2));
-                wordList.put("modelo", cursor.getString(3));
+                wordList.put("marca", cursor.getString(3));
+                wordList.put("modelo", cursor.getString(4));
                 wordList.put("motorizacion", cursor.getString(5));
                 wordList.put("cilindrada", cursor.getString(6));
                 wordList.put("fechaCompra", cursor.getString(7));

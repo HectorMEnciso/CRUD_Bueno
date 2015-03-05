@@ -80,21 +80,21 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                     objIndent.putExtra("fechaCompra", fechaCompra.getText().toString());
 
                     startActivityForResult(objIndent, 2);*/
-                    for (int k = 0; k < datos.size(); k++) {//Recorremos el ArrayList<Coches> datos
-                        if (datos.get(k).getMatricula().toString().equalsIgnoreCase(m)) {//Para cada elemento comparamos cada matricula
+                    for (int k = 0; k < cochesList.size(); k++) {//Recorremos el ArrayList<Coches> datos
+                        if (cochesList.get(k).get("matricula").toString().equalsIgnoreCase(m)) {//Para cada elemento comparamos cada matricula
                             x = k;//Guardamos aquella posicion cuyo elemento coincida.
                         }
                     }
 
                // Pasamos todos los datos del elemento al editActivity
-                    data.putExtra("id", String.valueOf(datos.get(x).getIdentificador()));
-                    data.putExtra("Matricula", datos.get(x).getMatricula().toString());
-                    data.putExtra("Marca", datos.get(x).getMarca().toString());
-                    data.putExtra("Modelo", datos.get(x).getModelo().toString());
-                    data.putExtra("Motorizacion", datos.get(x).getMotorizacion().toString());
-                    data.putExtra("Cilindrada", datos.get(x).getCilindrada());
-                    data.putExtra("Fecha", datos.get(x).getFechaCompra().toString());
-                    data.putExtra("Imagen", datos.get(x).getImageURI().toString());
+                    data.putExtra("id", cochesList.get(x).get("id"));
+                    data.putExtra("Matricula", cochesList.get(x).get("matricula").toString());
+                    data.putExtra("Marca",cochesList.get(x).get("marca").toString());
+                    data.putExtra("Modelo", cochesList.get(x).get("modelo").toString());
+                    data.putExtra("Motorizacion", cochesList.get(x).get("motorizacion").toString());
+                    data.putExtra("Cilindrada", cochesList.get(x).get("cilindrada").toString());
+                    data.putExtra("Fecha", cochesList.get(x).get("fechaCompra").toString());
+                    data.putExtra("Imagen", cochesList.get(x).get("idfoto").toString());
                     data.putExtra("Position", x);//mando la posicion correcta del elemento buscado.
                     Log.e("posClick", String.valueOf(x));
                     startActivityForResult(data, 2);

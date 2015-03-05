@@ -47,11 +47,11 @@ public class editActivity extends Activity {
         String id = objIntent.getStringExtra("id");
         HashMap<String, String> CochesList = controller.getCocheInfo(id);
 
-        contactImageImgView.setImageURI(Uri.parse(CochesList.get("Imagen")));
-        Matricula.setText(CochesList.get("Matricula"));
-        Marca.setText(CochesList.get("Marca"));
-        Modelo.setText(CochesList.get("Modelo"));
-        Cilindrada.setText(CochesList.get("Cilindrada"));
+        contactImageImgView.setImageURI(Uri.parse(CochesList.get("idfoto")));
+        Matricula.setText(CochesList.get("matricula"));
+        Marca.setText(CochesList.get("marca"));
+        Modelo.setText(CochesList.get("modelo"));
+        Cilindrada.setText(CochesList.get("cilindrada"));
         moto=getIntent().getStringExtra("Motorizacion");
         Log.e("MOTO",moto);
         switch (moto){
