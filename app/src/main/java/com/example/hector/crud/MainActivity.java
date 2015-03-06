@@ -35,7 +35,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     private SearchView mSearchView; //Declaracion global del SearchView sSearchView
     private ListView lstCoches; //Declaracion GLobal del listView lstCoches.
     //adaptadorCoches adaptador; //Declaracion global del adapdatorCoches adaptador.
-    private ArrayList<Coches> datos = new ArrayList<Coches>();//Declaracion global del ArrayList<Coches> datos.
+    //private ArrayList<Coches> datos = new ArrayList<Coches>();//Declaracion global del ArrayList<Coches> datos.
     private TextView ID;
     int posi,x; //Variables globales para las posiciones.
     DBController controller = new DBController(this);
@@ -70,17 +70,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                     TextView cilindrada = (TextView) v.findViewById(R.id.lblCilindrada);
                     TextView fechaCompra = (TextView) v.findViewById(R.id.lblFechaCompra);
                    String m = matricula.getText().toString();//Almacenamos el texto de lblMatricula
-                    /*objIndent = new Intent(getApplicationContext(),editActivity.class);
-                    objIndent.putExtra("id", ID.getText().toString());
-                    objIndent.putExtra("idfoto",contactImageImgView.getImageURI().toString());
-                    objIndent.putExtra("matricula", matricula.getText().toString());
-                    objIndent.putExtra("marca", marca.getText().toString());
-                    objIndent.putExtra("modelo", modelo.getText().toString());
-                    objIndent.putExtra("motorizacion", motorizacion.getText().toString());
-                    objIndent.putExtra("cilindrada", cilindrada.getText().toString());
-                    objIndent.putExtra("fechaCompra", fechaCompra.getText().toString());
 
-                    startActivityForResult(objIndent, 2);*/
                     for (int k = 0; k < cochesList.size(); k++) {//Recorremos el ArrayList<Coches> datos
                         if (cochesList.get(k).get("matricula").toString().equalsIgnoreCase(m)) {//Para cada elemento comparamos cada matricula
                             x = k;//Guardamos aquella posicion cuyo elemento coincida.
@@ -129,7 +119,6 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -138,7 +127,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         super.onCreateContextMenu(menu, v, menuInfo);
 
         MenuInflater inflater = getMenuInflater();
-        TextView matricula=(TextView) v.findViewById(R.id.lblMatricula);
+
         if (v.getId() == R.id.LstOpciones) {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 
@@ -193,30 +182,4 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 return super.onOptionsItemSelected(item);
         }
     }
-    /*public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                Bundle bundle = data.getExtras();
-           //     adaptador.addCoche(bundle.getString("").getString("Matricula"), bundle.getString("Marca"), bundle.getString("Modelo"), bundle.getString("Motorizacion"), bundle.getString("Cilindrada"), bundle.getString("FechaCompra"), Uri.parse(bundle.getString("Imagen")),datos);
-                //adaptador.addCoche(datos); No he visto como implementarlo de esta forma.
-
-                Toast.makeText(getBaseContext(), "Coche agredado correctamente", Toast.LENGTH_SHORT).show();
-                adaptador.notifyDataSetChanged();//Refresca adaptador.
-            }
-        }
-        if (requestCode == 2) {
-            if (resultCode == RESULT_OK) {
-                Bundle bundle = data.getExtras();
-              //  adaptador.editCoche(new Coches(bundle.getString("Matricula"), bundle.getString("Marca"), bundle.getString("Modelo"), bundle.getString("Motorizacion"), bundle.getString("Cilindrada"), bundle.getString("FechaCompra"), Uri.parse(bundle.getString("Imagen"))), bundle.getInt("Position"),datos);
-               Log.e("possssssssssssss",String.valueOf(bundle.getInt("Position")));
-                Toast.makeText(getBaseContext(), "Coche modificado correctamente", Toast.LENGTH_SHORT).show();
-
-                mSearchView.setQuery("",false);//Borra Texto lista
-                mSearchView.clearFocus();//pierde el foco de la lista.
-                //adaptador.UpdateAdaptador(datos);
-                adaptador.notifyDataSetChanged();//Refresca adaptador.
-
-            }
-        }
-    }*/
 }
