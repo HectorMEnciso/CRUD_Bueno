@@ -1,6 +1,7 @@
 package com.example.hector.crud;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 import java.io.File;
@@ -33,9 +34,9 @@ public class RssParserDom
         archivo = file;
     }
 
-    public ArrayList<Noticia> parse() {
+    public ArrayList<Coches> parse() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        ArrayList<Noticia> noticias = new ArrayList<Noticia>();
+        ArrayList<Coches> coches = new ArrayList<Coches>();
         
         try 
         {
@@ -45,56 +46,69 @@ public class RssParserDom
             File f = new File(archivo);
             Document dom = builder.parse(f);
             Element root = dom.getDocumentElement();
-            NodeList items = root.getElementsByTagName("item");
+            NodeList items = root.getElementsByTagName("Coches");
             
             for (int i=0; i<items.getLength(); i++)
             {
-                Noticia noticia = new Noticia();
+                Coches coche = new Coches();
                 
                 Node item = items.item(i);
-                NodeList datosNoticia = item.getChildNodes();
+                NodeList datosCoches = item.getChildNodes();
                 
-                for (int j=0; j<datosNoticia.getLength(); j++)
+                for (int j=0; j<datosCoches.getLength(); j++)
                 {
-                    Node dato = datosNoticia.item(j);
+                    Node dato = datosCoches.item(j);
                     String etiqueta = dato.getNodeName();
                     
-                    if (etiqueta.equals("title"))
+                    if (etiqueta.equals("id"))
                     {
                     	String texto = obtenerTexto(dato);
                     	
-                    	noticia.setTitulo(texto);
-                        queryValues.put("title", noticia.getTitulo());
+                    	coche.setIdentificador(Integer.parseInt(texto));
+                        queryValues.put("id", String.valueOf(coche.getIdentificador()));
                         Log.e("texto", texto.toString());
-                        Log.e("titulo", noticia.getTitulo().toString());
+                        Log.e("id", String.valueOf(coche.getIdentificador()));
                     } 
-                    else if (etiqueta.equals("link"))
+                    else if (etiqueta.equals("idfoto"))
                     {
-                    	noticia.setLink(dato.getFirstChild().getNodeValue());
-
-                        queryValues.put("link", noticia.getLink());
+                        coche.setImageURI(Uri.parse(dato.getFirstChild().getNodeValue()));
+                        queryValues.put("idfoto", coche.getImageURI().toString());
                     } 
-                    else if (etiqueta.equals("description"))
+                    else if (etiqueta.equals("matricula"))
                     {
                         String texto = obtenerTexto(dato);
-                        
-                        noticia.setDescripcion(texto);
 
-                        queryValues.put("description", noticia.getDescripcion());
+                        coche.setMatricula(texto);
+                        queryValues.put("matricula", coche.getMatricula());
                     } 
-                    else if (etiqueta.equals("guid"))
+                    else if (etiqueta.equals("marca"))
                     {
-                    	noticia.setGuid(dato.getFirstChild().getNodeValue());
-                        queryValues.put("guid",noticia.getGuid());
+                        coche.setMarca(dato.getFirstChild().getNodeValue());
+                        queryValues.put("marca",coche.getMarca());
                     }
-                    else if (etiqueta.equals("pubDate"))
+                    else if (etiqueta.equals("modelo"))
                     {
-                    	noticia.setpubDate(dato.getFirstChild().getNodeValue());
-                        queryValues.put("pubDate", noticia.getpubDate());
+                        coche.setModelo(dato.getFirstChild().getNodeValue());
+                        queryValues.put("modelo", coche.getModelo());
+                    }
+                    else if (etiqueta.equals("motorizacion"))
+                    {
+                        coche.setMotorizacion(dato.getFirstChild().getNodeValue());
+                        queryValues.put("motorizacion", coche.getMotorizacion());
+                    }
+                    else if (etiqueta.equals("cilindrada"))
+                    {
+                        coche.setCilindrada(dato.getFirstChild().getNodeValue());
+                        queryValues.put("cilindrada", coche.getCilindrada());
+                    }
+                    else if (etiqueta.equals("fechaCompra"))
+                    {
+                        coche.setFechaCompra(dato.getFirstChild().getNodeValue());
+                        queryValues.put("fechaCompra",coche.getFechaCompra());
                     }
 
                 }
-                noticias.add(noticia);
+                coches.add(coche);
             }
         } 
         catch (Exception ex) 
@@ -102,7 +116,7 @@ public class RssParserDom
             throw new RuntimeException(ex);
         } 
         
-        return noticias;
+        return coches;
     }
 
 	private String obtenerTexto(Node dato)

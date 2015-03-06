@@ -7,6 +7,11 @@ import android.net.Uri;
  */
 public class Coches {
     private int id;
+
+    public void setIdentificador(int id) {
+        this.id = id;
+    }
+
     private String Matricula;
     private String Marca;
     private String Modelo;
