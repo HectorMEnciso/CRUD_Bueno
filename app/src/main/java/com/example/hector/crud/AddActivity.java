@@ -34,9 +34,12 @@ public class AddActivity extends Activity {
     private EditText Cilindrada;
     private DatePicker FechaCompra;
     private Button reset;
+    boolean entroGaleria=false;
     private String opnSpinner;
     ImageView contactImageImgView;
-    Uri imageUri=Uri.parse("android.resource://com.example.hector.crud/drawable/car.png");
+
+    Uri imageUri;//Uri.parse("android.resource://com.example.hector.crud/drawable/car.png");
+
     DBController controller = new DBController(this);
 
     @Override
@@ -76,6 +79,7 @@ public class AddActivity extends Activity {
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Contact Image"), 1);
+                entroGaleria=true;
             }
 
         });
@@ -88,8 +92,8 @@ public class AddActivity extends Activity {
         if (resCode == RESULT_OK) {
             if (reqCode == 1) {
                 imageUri = data.getData();
-                Log.e("imaaaaaaaaaaaaaaagennn", imageUri.toString());
-                contactImageImgView.setImageURI(data.getData());
+                Log.e("Imagen", imageUri.toString());
+                contactImageImgView.setImageURI(imageUri);
             }
         }
     }
@@ -99,6 +103,14 @@ public class AddActivity extends Activity {
         mes=FechaCompra.getMonth()+1;
         anno=FechaCompra.getYear();
         String fecha=dia+"/"+mes+"/"+anno;
+
+        if(!entroGaleria) {
+            //imageUri = Uri.parse("android.resource://com.example.hector.crud/drawable/car.png");
+            imageUri = Uri.parse(String.valueOf(R.drawable.car));
+            entroGaleria=false;
+        }
+
+        Log.e("imageUri", imageUri.toString());
 
         HashMap<String, String> queryValues =  new  HashMap<String, String>();
         queryValues.put("idfoto", imageUri.toString());
@@ -110,35 +122,19 @@ public class AddActivity extends Activity {
         queryValues.put("fechaCompra",fecha.toString());
         controller.insertCoche(queryValues);
         this.callHomeActivity(v);
-        /*Intent data = new Intent();
-        Bundle b= new Bundle();
-        int dia,mes,anno;
-        dia=FechaCompra.getDayOfMonth();
-        mes=FechaCompra.getMonth()+1;
-        anno=FechaCompra.getYear();
-        String fecha=dia+"/"+mes+"/"+anno;
-        b.putString("Imagen", imageUri.toString());
-        b.putString("Matricula",Matricula.getText().toString().toUpperCase());
-        b.putString("Marca", Marca.getText().toString().toUpperCase());
-        b.putString("Modelo", Modelo.getText().toString().toUpperCase());
-        b.putString("Cilindrada", Cilindrada.getText().toString());
-        b.putString("Motorizacion",opnSpinner.toString().toUpperCase());
-        b.putString("FechaCompra",fecha.toString());
-        data.putExtras(b);
-        setResult(RESULT_OK, data);
-        finish();*/
     }
     public void onClickCancelar(View v){
         finish();
     }
-
     public void onClickReset(View v){
-    contactImageImgView.setImageResource(R.drawable.car);
-    Matricula.setText("");
-    Marca.setText("");
-    Modelo.setText("");
-    Motorizacion.setSelection(0);
-    Cilindrada.setText("");
-    FechaCompra.updateDate(FechaCompra.getYear(),FechaCompra.getMonth(),FechaCompra.getDayOfMonth());
-}
+        reset=(Button) findViewById(R.id.btnReset);
+        contactImageImgView.setImageResource(R.drawable.car);
+        Matricula.setText("");
+        Marca.setText("");
+        Modelo.setText("");
+        Motorizacion.setSelection(0);
+        Cilindrada.setText("");
+        FechaCompra.updateDate(FechaCompra.getYear(),FechaCompra.getMonth(),FechaCompra.getDayOfMonth());
+        Log.e("ValorFecha",FechaCompra.getYear()+"/"+FechaCompra.getMonth()+"/"+FechaCompra.getDayOfMonth());
+    }
 }

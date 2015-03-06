@@ -32,10 +32,11 @@ public class editActivity extends Activity {
     private DatePicker FechaCompra;
     private String opnSpinner;
     boolean entroGaleria=false;
+
     DBController controller = new DBController(this);
-    int position;
+    HashMap<String, String> CochesList;
     String moto,fecha;
-    Uri imageUri = Uri.parse("android.resource://com.example.hector.crud/drawable/car.png");
+    Uri imageUri;// = Uri.parse("android.resource://com.example.hector.crud/drawable/car.png");
     ImageView contactImageImgView;
     int posMoto;
     @Override
@@ -53,9 +54,21 @@ public class editActivity extends Activity {
 
         Intent objIntent = getIntent();
         String id = objIntent.getStringExtra("id");
-        HashMap<String, String> CochesList = controller.getCocheInfo(id);
+        CochesList = controller.getCocheInfo(id);
 
-        contactImageImgView.setImageURI(Uri.parse(CochesList.get("idfoto")));
+        Log.e("FotoBien",Uri.parse(CochesList.get("idfoto")).toString());
+
+         if(CochesList.get("idfoto").toString().equals("2130837558")){
+             Log.e("if","entro if");
+             Uri imageUri1;
+             imageUri1=Uri.parse(String.valueOf(R.drawable.car));
+             contactImageImgView.setImageURI(imageUri1);
+        }
+        else{
+             Log.e("else","entro else");
+             contactImageImgView.setImageURI(Uri.parse(CochesList.get("idfoto")));
+         }
+        //contactImageImgView.setImageURI(Uri.parse(CochesList.get("idfoto")));
         Matricula.setText(CochesList.get("matricula"));
         Marca.setText(CochesList.get("marca"));
         Modelo.setText(CochesList.get("modelo"));
@@ -104,9 +117,9 @@ public class editActivity extends Activity {
                         String CocheId = objIntent.getStringExtra("id");
                         queryValues.put("id", CocheId);
                         queryValues.put("idfoto", imageUri.toString());
-                        queryValues.put("matricula", Matricula.getText().toString());
-                        queryValues.put("marca", Marca.getText().toString());
-                        queryValues.put("modelo", Modelo.getText().toString());
+                        queryValues.put("matricula", Matricula.getText().toString().toUpperCase());
+                        queryValues.put("marca", Marca.getText().toString().toUpperCase());
+                        queryValues.put("modelo", Modelo.getText().toString().toUpperCase());
                         queryValues.put("cilindrada", Cilindrada.getText().toString());
                         queryValues.put("motorizacion", opnSpinner.toString().toUpperCase());
                         int dia,mes,anno;
@@ -117,27 +130,6 @@ public class editActivity extends Activity {
                         queryValues.put("fechaCompra",fecha.toString());
                         controller.updateCoche(queryValues);
                         callHomeActivity(v);
-                      /*int dia,mes,anno;
-                        dia=FechaCompra.getDayOfMonth();
-                        mes=FechaCompra.getMonth()+1;
-                        anno=FechaCompra.getYear();
-                        String fecha=dia+"/"+mes+"/"+anno;
-                        position=getIntent().getIntExtra("Position",0);//recibo posicion correcta del elemento buscado
-                        Log.e("posicionEdit",String.valueOf(position));
-                        Bundle b= new Bundle();
-                        b.putInt("Position", position);
-                        b.putString("Imagen",imageUri.toString());
-                        b.putString("Matricula",Matricula.getText().toString().toUpperCase());
-                        b.putString("Marca", Marca.getText().toString().toUpperCase());
-                        b.putString("Modelo", Modelo.getText().toString().toUpperCase());
-                        b.putString("Cilindrada", Cilindrada.getText().toString());
-                        b.putString("Motorizacion",opnSpinner.toString().toUpperCase());
-                        b.putString("FechaCompra",fecha.toString());
-                        controller.updateCoche(queryValues);
-                        data.putExtras(b);
-                        setResult(RESULT_OK,data);
-                        //---closes the activity---
-                        finish();*/
                     }
                 });
         builder1.setNegativeButton("No",
@@ -160,8 +152,8 @@ public class editActivity extends Activity {
         if (resCode == RESULT_OK) {
             if (reqCode == 1) {
                 imageUri = data.getData();
-                entroGaleria=true;
-                contactImageImgView.setImageURI(data.getData());
+
+                contactImageImgView.setImageURI(imageUri);
             }
         }
     }
@@ -171,42 +163,20 @@ public class editActivity extends Activity {
 
     public void onResume() {
         super.onResume();
-        String matricula,marca,modelo,cilindrada,imagen,moto,fecha;
-       /* Matricula = (EditText) findViewById(R.id.entradaMatricula);
-        Marca = (EditText) findViewById(R.id.entradaMarca);
-        Modelo = (EditText) findViewById(R.id.entradaModelo);
-        Cilindrada=(EditText)findViewById(R.id.entradaCilindrada);
-        FechaCompra=(DatePicker)findViewById(R.id.datePicker);
-       contactImageImgView=(ImageView)findViewById(R.id.imgViewContactImage);*/
-        moto=getIntent().getStringExtra("Motorizacion");
-        Log.e("MOTO",moto);
-        switch (moto){
-            case "GASOLINA":
-                posMoto=0;
-                break;
-            case "DIESEL":
-                posMoto=1;
-                break;
-            case "HIBRIDO":
-                posMoto=2;
-                break;
-        }
+        String matricula,marca,modelo,cilindrada,fecha;
+
         fecha=getIntent().getStringExtra("Fecha");
         matricula=getIntent().getStringExtra("Matricula");
         marca=getIntent().getStringExtra("Marca");
         modelo=getIntent().getStringExtra("Modelo");
         cilindrada=getIntent().getStringExtra("Cilindrada");
-        Log.e("vaaaaaaaaaalor",imageUri.toString());
 
-        if(imageUri.equals("android.resource://com.example.hector.crud/drawable/car.png")){
-            contactImageImgView.setImageResource(R.drawable.car);
-        }
-
-        if(!entroGaleria) {
+       /*if(!entroGaleria) {
             imageUri = Uri.parse(getIntent().getStringExtra("Imagen"));
+            Log.e("valorrrr",imageUri.toString());
             entroGaleria=false;
-        }
-        //Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
+        }*/
+
         ArrayAdapter<String> adap=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,datos);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Motorizacion.setAdapter(adap);
@@ -241,10 +211,11 @@ public class editActivity extends Activity {
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Contact Image"), 1);
+                entroGaleria=true;
             }
 
         });
-        contactImageImgView.setImageURI(imageUri);
+       //contactImageImgView.setImageURI(imageUri);
     }
 
 }
