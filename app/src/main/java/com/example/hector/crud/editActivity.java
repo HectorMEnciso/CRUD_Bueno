@@ -58,10 +58,11 @@ public class editActivity extends Activity {
 
         Log.e("FotoBien",Uri.parse(CochesList.get("idfoto")).toString());
 
-         if(CochesList.get("idfoto").toString().equals("2130837558")){
+         if(CochesList.get("idfoto").toString().equals(String.valueOf(R.drawable.car))){
              Log.e("if","entro if");
              Uri imageUri1;
-             imageUri1=Uri.parse(String.valueOf(R.drawable.car));
+             //imageUri1=Uri.parse(String.valueOf(R.drawable.car));
+             imageUri1=Uri.parse("android.resource://com.example.hector.crud/"+R.drawable.car);
              contactImageImgView.setImageURI(imageUri1);
              Log.e("yaaaa", imageUri1.toString());
         }
