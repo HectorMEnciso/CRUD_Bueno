@@ -60,11 +60,10 @@ public class editActivity extends Activity {
 
          if(CochesList.get("idfoto").toString().equals(String.valueOf(R.drawable.car))){
              Log.e("if","entro if");
-             Uri imageUri1;
-             //imageUri1=Uri.parse(String.valueOf(R.drawable.car));
-             imageUri1=Uri.parse("android.resource://com.example.hector.crud/"+R.drawable.car);
-             contactImageImgView.setImageURI(imageUri1);
-             Log.e("yaaaa", imageUri1.toString());
+
+             imageUri=Uri.parse("android.resource://com.example.hector.crud/"+R.drawable.car);
+             contactImageImgView.setImageURI(imageUri);
+             Log.e("yaaaa", imageUri.toString());
         }
         else{
              Log.e("else","entro else");
@@ -119,6 +118,7 @@ public class editActivity extends Activity {
                         String CocheId = objIntent.getStringExtra("id");
                         queryValues.put("id", CocheId);
                         queryValues.put("idfoto", imageUri.toString());
+                        Log.e("cambiada",imageUri.toString());
                         queryValues.put("matricula", Matricula.getText().toString().toUpperCase());
                         queryValues.put("marca", Marca.getText().toString().toUpperCase());
                         queryValues.put("modelo", Modelo.getText().toString().toUpperCase());
@@ -173,9 +173,10 @@ public class editActivity extends Activity {
         modelo=getIntent().getStringExtra("Modelo");
         cilindrada=getIntent().getStringExtra("Cilindrada");
 
-       if(!entroGaleria) {
-            //imageUri = Uri.parse(getIntent().getStringExtra("Imagen"));
-           imageUri = Uri.parse(String.valueOf(R.drawable.car));
+        if(!entroGaleria){
+            Log.e("entroGaleria","");
+            imageUri = Uri.parse(getIntent().getStringExtra("Imagen"));
+          // imageUri = Uri.parse(String.valueOf(R.drawable.car));
             Log.e("valorrrr",imageUri.toString());
             entroGaleria=false;
         }
