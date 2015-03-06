@@ -195,6 +195,12 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 return true;
             case R.id.GuardarBDOverflow:
                 return true;
+            case R.id.Cargarxml:
+                coches.clear();
+                CargarXmlTask tarea = new CargarXmlTask();
+                // tarea.execute("http://212.170.237.10/rss/rss.aspx");
+                tarea.execute("http://10.0.2.2/Coches.xml");
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
