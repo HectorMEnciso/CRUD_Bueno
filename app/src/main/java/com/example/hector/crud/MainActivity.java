@@ -201,6 +201,23 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 // tarea.execute("http://212.170.237.10/rss/rss.aspx");
                 tarea.execute("http://10.0.2.2/Coches.xml");
 
+                for(int w=0;w<coches.size();w++){
+                    {
+                        String matricula= coches.get(w).getMatricula();
+
+                        if (!controller.existeCoche(matricula)){
+                            HashMap<String, String> queryValues =  new  HashMap<String, String>();
+                            queryValues.put("idfoto",String.valueOf(coches.get(w).getImageURI()));
+                            queryValues.put("matricula",coches.get(w).getMatricula());
+                            queryValues.put("marca",coches.get(w).getMarca());
+                            queryValues.put("modelo",coches.get(w).getModelo());
+                            queryValues.put("motorizacion",coches.get(w).getMotorizacion());
+                            queryValues.put("cilindrada",coches.get(w).getCilindrada());
+                            queryValues.put("fechaCompra",coches.get(w).getFechaCompra());
+                            controller.insertCoche(queryValues);
+                        }
+                    }
+                }
 
                 return true;
             default:
