@@ -96,6 +96,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                     data.putExtra("Cilindrada", cochesList.get(x).get("cilindrada").toString());
                     data.putExtra("Fecha", cochesList.get(x).get("fechaCompra").toString());
                     data.putExtra("Imagen", cochesList.get(x).get("idfoto").toString());
+                    Log.e("rrrrr",cochesList.get(x).get("idfoto").toString());
                     data.putExtra("Position", x);//mando la posicion correcta del elemento buscado.
                     Log.e("posClick", String.valueOf(x));
                     startActivityForResult(data, 2);

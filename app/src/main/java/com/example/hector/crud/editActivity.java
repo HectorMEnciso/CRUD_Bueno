@@ -63,6 +63,7 @@ public class editActivity extends Activity {
              Uri imageUri1;
              imageUri1=Uri.parse(String.valueOf(R.drawable.car));
              contactImageImgView.setImageURI(imageUri1);
+             Log.e("yaaaa", imageUri1.toString());
         }
         else{
              Log.e("else","entro else");
@@ -171,11 +172,12 @@ public class editActivity extends Activity {
         modelo=getIntent().getStringExtra("Modelo");
         cilindrada=getIntent().getStringExtra("Cilindrada");
 
-       /*if(!entroGaleria) {
-            imageUri = Uri.parse(getIntent().getStringExtra("Imagen"));
+       if(!entroGaleria) {
+            //imageUri = Uri.parse(getIntent().getStringExtra("Imagen"));
+           imageUri = Uri.parse(String.valueOf(R.drawable.car));
             Log.e("valorrrr",imageUri.toString());
             entroGaleria=false;
-        }*/
+        }
 
         ArrayAdapter<String> adap=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,datos);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
