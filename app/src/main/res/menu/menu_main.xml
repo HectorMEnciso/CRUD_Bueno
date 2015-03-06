@@ -5,7 +5,7 @@
         android:showAsAction="always"
         android:title="Añadir"></item>
     <item
-        android:id="@+id/GuardarFicheroOverflow"
+        android:id="@+id/GuardarBDOverflow"
         android:icon="@android:drawable/ic_menu_save"
         android:showAsAction="always"
         android:title="Guardar en fichero"></item>
@@ -25,10 +25,10 @@
                 android:icon="@android:drawable/ic_delete"
                 android:title="Borrar todas"></item>
             <item
-                android:id="@+id/GuardarFichero"
+                android:id="@+id/GuardarBD"
                 android:icon="@android:drawable/ic_menu_save"
                 android:showAsAction="never"
-                android:title="Guardar en fichero"></item>
+                android:title="Guardar en Base de datos"></item>
 
         </menu>
     </item>

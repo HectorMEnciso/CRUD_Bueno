@@ -62,6 +62,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                     ID=(TextView) v.findViewById(R.id.ID);
                     Intent data = new Intent(MainActivity.this, editActivity.class);//Intent explicito a editActivity
                     ImageView contactImageImgView=(ImageView)findViewById(R.id.imgViewContactImage);
+                    TextView ID = (TextView) v.findViewById(R.id.ID);
                     TextView matricula = (TextView) v.findViewById(R.id.lblMatricula);//Obtenemos la referencia al listView TextView lblMatricula
                     TextView marca = (TextView) v.findViewById(R.id.lblMarca);
                     TextView modelo = (TextView) v.findViewById(R.id.lblModelo);
@@ -100,7 +101,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                     startActivityForResult(data, 2);
                 }
             });
-            adaptador = new SimpleAdapter( MainActivity.this,cochesList, R.layout.mi_layout, new String[] { "id" ,"idfoto","matricula","marca","modelo","motorizacion","cilindrada","fechaCompra"}, new int[] {R.id.ID,R.id.imgViewContactImage, R.id.lblMatricula, R.id.lblMarca,R.id.lblModelo,R.id.lblMotorizacion,R.id.lblCilindrada,R.id.lblFechaCompra});
+            adaptador = new SimpleAdapter( MainActivity.this,cochesList, R.layout.mi_layout, new String[] { "id" ,"idfoto","matricula","marca","modelo","motorizacion","cilindrada","fechaCompra"}, new int[] {R.id.ID,R.id.ivContactImage, R.id.lblMatricula, R.id.lblMarca,R.id.lblModelo,R.id.lblMotorizacion,R.id.lblCilindrada,R.id.lblFechaCompra});
             lstCoches.setAdapter(adaptador);
         }
     }
@@ -140,7 +141,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         if (v.getId() == R.id.LstOpciones) {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 
-            menu.setHeaderTitle("SE BORRARÁ EL VEHICULO CON MATRÍCULA: "+datos.get(info.position).getMatricula());
+            menu.setHeaderTitle("SE BORRARÁ EL VEHICULO CON MATRÍCULA: "+cochesList.get(info.position).get("matricula"));
 
             inflater.inflate(R.menu.opciones_elementos, menu);
         }
@@ -148,17 +149,17 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        TextView ID=(TextView) info.targetView.findViewById(R.id.ID);
         switch (item.getItemId()) {
             case R.id.EliminarSeleccionada:
                 posi = info.position;
                 String dataCarDelete="¡COCHE ELIMINADO!\n";
-                dataCarDelete=dataCarDelete+"MATRICULA:"+datos.get(posi).getMatricula()+"\nMARCA: "+datos.get(posi).getMarca()+"\nMODELO: "+datos.get(posi).getModelo();
+                dataCarDelete=dataCarDelete+"MATRICULA: "+cochesList.get(posi).get("matricula")+"\nMARCA: "+cochesList.get(posi).get("marca")+"\nMODELO: "+cochesList.get(posi).get("modelo");
                 Toast.makeText(getBaseContext(),dataCarDelete, Toast.LENGTH_LONG).show();
                 String CocheId = ID.getText().toString();
                 controller.deleteCoche(CocheId);
                 cochesList.remove(posi);
                 dataCarDelete="";
-                //adaptador.delCoches(datos, posi);
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
                 return true;
             default:
@@ -182,21 +183,16 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 Intent objIntent1 = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(objIntent1);
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
-               // adaptador.deleteAll(datos);
-                //adaptador.notifyDataSetChanged();//Refresca adaptador.
-                //adaptador.UpdateAdaptador(datos);
                 return true;
-            case R.id.GuardarFichero:
-                //saveCoches(datos);
+            case R.id.GuardarBD:
                 return true;
-            case R.id.GuardarFicheroOverflow:
-                //saveCoches(datos);
+            case R.id.GuardarBDOverflow:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    /*public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 Bundle bundle = data.getExtras();
@@ -220,60 +216,6 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
 
             }
-        }
-    }
-    /*public void onResume() {
-        super.onResume();
-        if (datos.isEmpty()) {//Si el arraylist esta vacio
-            loadCoches();
-        }
-    }
-    public void onPause() {
-        super.onPause();
-        saveCoches(datos);
-    }
-    public void saveCoches(ArrayList<Coches> d) {
-        Coches Coches = null;
-        try {
-            File ruta_sd = Environment.getExternalStorageDirectory();
-            File f = new File(ruta_sd.getAbsolutePath(), "lista_Coches.txt");
-            PrintWriter printWriter = new PrintWriter(f);
-            for (int x = 0; x < datos.size(); x++) {
-                Coches = new Coches(datos.get(x).getMatricula(), datos.get(x).getMarca(), datos.get(x).getModelo(), datos.get(x).getMotorizacion(), datos.get(x).getCilindrada(), datos.get(x).getFechaCompra(), datos.get(x).getImageURI());
-                printWriter.println(Coches.toString());
-            }
-            printWriter.close();
-        } catch (Exception e) {
-            Log.e("Ficheros", "Error al escribir en SD");
-        }
-    }
-    public void loadCoches() {
-        String Matricula = null;
-        String Marca = null;
-        String Modelo = null;
-        String Motorizacion = null;
-        String Cilindrada = null;
-        String FechaCompra = null;
-        String Imagen = null;
-        String sCadena;
-        File ruta_sd = Environment.getExternalStorageDirectory();
-        File f = new File(ruta_sd.getAbsolutePath(), "lista_Coches.txt");
-        try {
-            BufferedReader fin = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
-            while ((sCadena = fin.readLine()) != null) {
-                Matricula = sCadena;// debido a que el puntero se queda al final.
-                Marca = fin.readLine();
-                Modelo = fin.readLine();
-                Motorizacion = fin.readLine();
-                Cilindrada = fin.readLine();
-                FechaCompra = fin.readLine();
-                Imagen = fin.readLine();
-               // adaptador.addCoche(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, Uri.parse(Imagen));
-               adaptador.addCoche(Matricula, Marca, Modelo, Motorizacion, Cilindrada, FechaCompra, Uri.parse(Imagen),datos);
-            }
-            adaptador.notifyDataSetChanged();//Refresca adaptador.
-        } catch (Exception e) {
-            Log.e("Ficheros", "Error al leer en SD");
         }
     }*/
 }

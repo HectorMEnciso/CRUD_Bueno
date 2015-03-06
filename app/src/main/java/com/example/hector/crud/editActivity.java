@@ -76,6 +76,7 @@ public class editActivity extends Activity {
         }
         Motorizacion.setSelection(posMoto);
         fecha=getIntent().getStringExtra("Fecha");
+        Log.d("Fecha",fecha.toString());
         String str[] = fecha.split("/");//Vector con caracter delimitador
         int day = Integer.parseInt(str[0]);
         int month = Integer.parseInt(str[1]);
@@ -108,6 +109,11 @@ public class editActivity extends Activity {
                         queryValues.put("modelo", Modelo.getText().toString());
                         queryValues.put("cilindrada", Cilindrada.getText().toString());
                         queryValues.put("motorizacion", opnSpinner.toString().toUpperCase());
+                        int dia,mes,anno;
+                        dia=FechaCompra.getDayOfMonth();
+                        mes=FechaCompra.getMonth()+1;
+                        anno=FechaCompra.getYear();
+                        String fecha=dia+"/"+mes+"/"+anno;
                         queryValues.put("fechaCompra",fecha.toString());
                         controller.updateCoche(queryValues);
                         callHomeActivity(v);

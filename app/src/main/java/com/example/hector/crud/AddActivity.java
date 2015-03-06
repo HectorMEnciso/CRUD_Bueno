@@ -43,6 +43,7 @@ public class AddActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_coches);
+
         Matricula = (EditText) findViewById(R.id.entradaMatricula);
         Marca = (EditText) findViewById(R.id.entradaMarca);
         Modelo = (EditText) findViewById(R.id.entradaModelo);
@@ -52,6 +53,7 @@ public class AddActivity extends Activity {
         FechaCompra=(DatePicker)findViewById(R.id.datePicker);
         reset=(Button)findViewById(R.id.btnReset);
         contactImageImgView = (ImageView) findViewById(R.id.imgViewContactImage);
+
         ArrayAdapter<String> adap=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,datos);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Motorizacion.setAdapter(adap);
@@ -97,11 +99,12 @@ public class AddActivity extends Activity {
         mes=FechaCompra.getMonth()+1;
         anno=FechaCompra.getYear();
         String fecha=dia+"/"+mes+"/"+anno;
+
         HashMap<String, String> queryValues =  new  HashMap<String, String>();
         queryValues.put("idfoto", imageUri.toString());
-        queryValues.put("matricula", Matricula.getText().toString());
-        queryValues.put("marca", Marca.getText().toString());
-        queryValues.put("modelo", Modelo.getText().toString());
+        queryValues.put("matricula", Matricula.getText().toString().toUpperCase());
+        queryValues.put("marca", Marca.getText().toString().toUpperCase());
+        queryValues.put("modelo", Modelo.getText().toString().toUpperCase());
         queryValues.put("cilindrada", Cilindrada.getText().toString());
         queryValues.put("motorizacion", opnSpinner.toString().toUpperCase());
         queryValues.put("fechaCompra",fecha.toString());
@@ -128,6 +131,7 @@ public class AddActivity extends Activity {
     public void onClickCancelar(View v){
         finish();
     }
+
     public void onClickReset(View v){
     contactImageImgView.setImageResource(R.drawable.car);
     Matricula.setText("");

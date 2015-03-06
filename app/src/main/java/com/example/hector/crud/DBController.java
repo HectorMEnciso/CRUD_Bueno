@@ -97,8 +97,6 @@ public class DBController extends SQLiteOpenHelper {
                 wordList.add(map);
             } while (cursor.moveToNext());
         }
-
-        // return contact list
         return wordList;
     }
     public HashMap<String, String> getCocheInfo(String id) {
@@ -108,7 +106,6 @@ public class DBController extends SQLiteOpenHelper {
         Cursor cursor = database.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
-                //HashMap<String, String> map = new HashMap<String, String>();
                 wordList.put("idfoto", cursor.getString(1));
                 wordList.put("matricula", cursor.getString(2));
                 wordList.put("marca", cursor.getString(3));
@@ -116,7 +113,6 @@ public class DBController extends SQLiteOpenHelper {
                 wordList.put("motorizacion", cursor.getString(5));
                 wordList.put("cilindrada", cursor.getString(6));
                 wordList.put("fechaCompra", cursor.getString(7));
-                //wordList.add(map);
             } while (cursor.moveToNext());
         }
         return wordList;
