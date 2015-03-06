@@ -42,7 +42,15 @@ public class editActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_coches);
+
         contactImageImgView=(ImageView)findViewById(R.id.imgViewContactImage);
+        Matricula = (EditText) findViewById(R.id.entradaMatricula);
+        Marca = (EditText) findViewById(R.id.entradaMarca);
+        Modelo = (EditText) findViewById(R.id.entradaModelo);
+        Cilindrada=(EditText)findViewById(R.id.entradaCilindrada);
+        Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
+        FechaCompra=(DatePicker)findViewById(R.id.datePicker);
+
         Intent objIntent = getIntent();
         String id = objIntent.getStringExtra("id");
         HashMap<String, String> CochesList = controller.getCocheInfo(id);
@@ -53,6 +61,7 @@ public class editActivity extends Activity {
         Modelo.setText(CochesList.get("modelo"));
         Cilindrada.setText(CochesList.get("cilindrada"));
         moto=getIntent().getStringExtra("Motorizacion");
+
         Log.e("MOTO",moto);
         switch (moto){
             case "GASOLINA":
@@ -75,7 +84,7 @@ public class editActivity extends Activity {
         FechaCompra.updateDate(year,month-1,day);
     }
 
-    public void onClick(View v){
+    public void onClick(final View v){
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
         builder1.setMessage("¿Está seguro que desea modificar el coche? ");
         builder1.setCancelable(true);
@@ -83,7 +92,7 @@ public class editActivity extends Activity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         HashMap<String, String> queryValues =  new  HashMap<String, String>();
-                        Intent data = new Intent();
+                        //Intent data = new Intent();
                         Matricula = (EditText) findViewById(R.id.entradaMatricula);
                         Marca = (EditText) findViewById(R.id.entradaMarca);
                         Modelo = (EditText) findViewById(R.id.entradaModelo);
@@ -100,8 +109,8 @@ public class editActivity extends Activity {
                         queryValues.put("cilindrada", Cilindrada.getText().toString());
                         queryValues.put("motorizacion", opnSpinner.toString().toUpperCase());
                         queryValues.put("fechaCompra",fecha.toString());
-
                         controller.updateCoche(queryValues);
+                        callHomeActivity(v);
                       /*int dia,mes,anno;
                         dia=FechaCompra.getDayOfMonth();
                         mes=FechaCompra.getMonth()+1;
@@ -137,7 +146,10 @@ public class editActivity extends Activity {
         alert11.show();
 
     }
-
+    public void callHomeActivity(View view) {
+        Intent objIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(objIntent);
+    }
     public void onActivityResult(int reqCode, int resCode, Intent data) {
         if (resCode == RESULT_OK) {
             if (reqCode == 1) {
@@ -154,12 +166,12 @@ public class editActivity extends Activity {
     public void onResume() {
         super.onResume();
         String matricula,marca,modelo,cilindrada,imagen,moto,fecha;
-        Matricula = (EditText) findViewById(R.id.entradaMatricula);
+       /* Matricula = (EditText) findViewById(R.id.entradaMatricula);
         Marca = (EditText) findViewById(R.id.entradaMarca);
         Modelo = (EditText) findViewById(R.id.entradaModelo);
         Cilindrada=(EditText)findViewById(R.id.entradaCilindrada);
         FechaCompra=(DatePicker)findViewById(R.id.datePicker);
-       contactImageImgView=(ImageView)findViewById(R.id.imgViewContactImage);
+       contactImageImgView=(ImageView)findViewById(R.id.imgViewContactImage);*/
         moto=getIntent().getStringExtra("Motorizacion");
         Log.e("MOTO",moto);
         switch (moto){
@@ -188,7 +200,7 @@ public class editActivity extends Activity {
             imageUri = Uri.parse(getIntent().getStringExtra("Imagen"));
             entroGaleria=false;
         }
-        Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
+        //Motorizacion=(Spinner)findViewById(R.id.spnMotorizacion);
         ArrayAdapter<String> adap=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,datos);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Motorizacion.setAdapter(adap);
