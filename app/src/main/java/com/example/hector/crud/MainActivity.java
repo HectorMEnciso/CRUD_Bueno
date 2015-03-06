@@ -200,6 +200,8 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 CargarXmlTask tarea = new CargarXmlTask();
                 // tarea.execute("http://212.170.237.10/rss/rss.aspx");
                 tarea.execute("http://10.0.2.2/Coches.xml");
+
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -209,14 +211,16 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     public void onResume(){
         super.onResume();
         // btnInsertar.callOnClick();
-
-        for(int t=0;t<cochesList.size();t++){
+        cochesList =  controller.getAllCoches();
+        /*for(int t=0;t<cochesList.size();t++){
             Log.e("errorrrrrrrrrrr", cochesList.get(t).get("matricula"));
-            /*txtResultado.append(noticiasList.get(t).get("title") + "\n" +
+            *//*txtResultado.append(noticiasList.get(t).get("title") + "\n" +
                     noticiasList.get(t).get("link") + "\n" +
                     noticiasList.get(t).get("description") + "\n" + noticiasList.get(t).get("guid") +
-                    noticiasList.get(t).get("pubDate"));*/
-        }
+                    noticiasList.get(t).get("pubDate"));*//*
+        }*/
+        adaptador = new SimpleAdapter(MainActivity.this,cochesList, R.layout.mi_layout, new String[] { "id" ,"idfoto","matricula","marca","modelo","motorizacion","cilindrada","fechaCompra"}, new int[] {R.id.ID,R.id.ivContactImage, R.id.lblMatricula, R.id.lblMarca,R.id.lblModelo,R.id.lblMotorizacion,R.id.lblCilindrada,R.id.lblFechaCompra});
+        lstCoches.setAdapter(adaptador);
     }
 
     public void onStop(){
@@ -266,15 +270,18 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         }
         protected void onPostExecute(Boolean result) {
 
-            //Tratamos la lista de noticias
-            //Por ejemplo: escribimos los t�tulos en pantalla
-            //txtResultado.setText("");
-            for(int i=0; i<coches.size(); i++)
-            {
-                /*txtResultado.setText(
-                        txtResultado.getText().toString() +
-                                System.getProperty("line.separator") +
-                                noticias.get(i).getTitulo());*/
+            for(int i=0; i<coches.size(); i++){
+                HashMap<String, String> queryValues =  new  HashMap<String, String>();
+                queryValues.put("idfoto", String.valueOf(coches.get(i).getImageURI()));
+                queryValues.put("matricula", coches.get(i).getMatricula());
+                queryValues.put("marca", coches.get(i).getMarca());
+                queryValues.put("modelo", coches.get(i).getModelo());
+                queryValues.put("cilindrada", coches.get(i).getCilindrada());
+                queryValues.put("motorizacion",coches.get(i).getMotorizacion());
+                queryValues.put("fechaCompra",coches.get(i).getFechaCompra());
+                controller.insertCoche(queryValues);
+                Intent objIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(objIntent);
             }
         }
     }
