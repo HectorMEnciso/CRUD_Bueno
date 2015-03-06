@@ -60,16 +60,7 @@ public class RssParserDom
                     Node dato = datosCoches.item(j);
                     String etiqueta = dato.getNodeName();
                     
-                    if (etiqueta.equals("id"))
-                    {
-                    	String texto = obtenerTexto(dato);
-                    	
-                    	coche.setIdentificador(Integer.parseInt(texto));
-                        queryValues.put("id", String.valueOf(coche.getIdentificador()));
-                        Log.e("texto", texto.toString());
-                        Log.e("id", String.valueOf(coche.getIdentificador()));
-                    } 
-                    else if (etiqueta.equals("idfoto"))
+                   if (etiqueta.equals("idfoto"))
                     {
                         coche.setImageURI(Uri.parse(dato.getFirstChild().getNodeValue()));
                         queryValues.put("idfoto", coche.getImageURI().toString());

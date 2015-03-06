@@ -117,6 +117,18 @@ public class DBController extends SQLiteOpenHelper {
         }
         return wordList;
     }
-
+    public boolean existeCoche (String matricula){
+        boolean existe=false;
+        String selectQuery = "SELECT * FROM Coches where matricula='" + matricula+"'";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()){
+            existe=true;
+        }
+        else {
+            existe = false;
+        }
+        return existe;
+    }
 
 }

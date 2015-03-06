@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -22,11 +23,17 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -41,6 +48,16 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     DBController controller = new DBController(this);
     SimpleAdapter adaptador;
     ArrayList<HashMap<String, String>> cochesList;
+    private ArrayList<Coches> coches= new ArrayList<Coches>();
+    HashMap<String, String> queryValues =  new  HashMap<String, String>();
+
+    public final static int SOCKET_PORT = 6000;
+    public final static String SERVER = "10.0.2.2";  // localhost
+    Socket sock = null;
+    FileOutputStream fos = null;
+    BufferedOutputStream bos = null;
+    String file="/data/data/com.example.hector.crud/files/Coches.xml";
+    public final static int FILE_SIZE = 6022386;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,6 +197,115 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void onResume(){
+        super.onResume();
+        // btnInsertar.callOnClick();
+
+        for(int t=0;t<cochesList.size();t++){
+            Log.e("errorrrrrrrrrrr", cochesList.get(t).get("matricula"));
+            /*txtResultado.append(noticiasList.get(t).get("title") + "\n" +
+                    noticiasList.get(t).get("link") + "\n" +
+                    noticiasList.get(t).get("description") + "\n" + noticiasList.get(t).get("guid") +
+                    noticiasList.get(t).get("pubDate"));*/
+        }
+    }
+
+    public void onStop(){
+        super.onStop();
+        for(int i=0;i<coches.size();i++){
+            {
+                String matricula= coches.get(i).getMatricula();
+
+                if (!controller.existeCoche(matricula)){
+                    HashMap<String, String> queryValues =  new  HashMap<String, String>();
+                    queryValues.put("idfoto",String.valueOf(coches.get(i).getImageURI()));
+                    queryValues.put("matricula",coches.get(i).getMatricula());
+                    queryValues.put("marca",coches.get(i).getMarca());
+                    queryValues.put("modelo",coches.get(i).getModelo());
+                    queryValues.put("motorizacion",coches.get(i).getMotorizacion());
+                    queryValues.put("cilindrada",coches.get(i).getCilindrada());
+                    queryValues.put("fechaCompra",coches.get(i).getFechaCompra());
+                    controller.insertCoche(queryValues);
+                }
+            }
+        }
+    }
+
+    private class CargarXmlTask extends AsyncTask<String,Integer,Boolean> {
+        @Override
+        protected Boolean doInBackground(String... params)  {
+            try {
+                Log.e("PreConnecting...", "");
+                sock = new Socket(SERVER, SOCKET_PORT);
+                Log.e("Connecting...", "");
+                obtenerfichero();
+
+                //pasar file.
+
+                RssParserDom saxparser = new RssParserDom(file);
+
+                coches = saxparser.parse();//parsear y guarda datos en lista de noticias
+                return true;
+            }
+            catch(IOException e) {
+                 /*if (fos != null) fos.close();
+                 if (bos != null) bos.close();
+                 if (sock != null) sock.close();*/
+            }
+            return true;
+
+        }
+        protected void onPostExecute(Boolean result) {
+
+            //Tratamos la lista de noticias
+            //Por ejemplo: escribimos los t�tulos en pantalla
+            //txtResultado.setText("");
+            for(int i=0; i<coches.size(); i++)
+            {
+                /*txtResultado.setText(
+                        txtResultado.getText().toString() +
+                                System.getProperty("line.separator") +
+                                noticias.get(i).getTitulo());*/
+            }
+        }
+    }
+
+    public void obtenerfichero () throws IOException {
+        int bytesRead;
+        int current = 0;
+        try {
+            // receive file
+            Log.e("Mensaje","entro en obtener fichero");
+            byte[] mybytearray = new byte[FILE_SIZE];
+            InputStream is = sock.getInputStream();
+            //fos = new OutputStreamWriter(openFileOutput(file, Context.MODE_PRIVATE));
+            Log.e("prueba",file.toString());
+            Log.e("Mensaje","obtengo inputstream");
+            File f = new File(file);
+            Log.e("Mensaje","creo file");
+            fos = new FileOutputStream(f);
+            Log.e("Mensaje","creo fos");
+            bos = new BufferedOutputStream(fos);
+            Log.e("Mensaje","creo bos");
+            bytesRead = is.read(mybytearray, 0, mybytearray.length);
+            current = bytesRead;
+
+            do {
+                bytesRead =
+                        is.read(mybytearray, current, (mybytearray.length - current));
+                if (bytesRead >= 0) current += bytesRead;
+            } while (bytesRead > -1);
+            bos.write(mybytearray,0,current);
+            bos.flush();
+            Log.e("prueba",file.toString());
+        }
+        finally {
+            if (fos != null) fos.close();
+            if (bos != null) bos.close();
+            if (sock != null) sock.close();
         }
     }
 }
