@@ -17,9 +17,9 @@ public class Coches {
     private String Cilindrada;
     private String FechaCompra;
     private Uri ImageURI;
-    public Coches() {
+    /*public Coches() {
 
-    }
+    }*/
 
     public String getMatricula() {
         return Matricula;
