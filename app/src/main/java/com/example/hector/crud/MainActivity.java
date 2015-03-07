@@ -197,7 +197,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
             case R.id.GuardarBDOverflow:
                 return true;
             case R.id.Generarxml:
-                controller.GeneralXMl(controller.getAllCoches());
+                controller.GenerarXMl(controller.getAllCoches());
                 return true;
             case R.id.Cargarxml:
 

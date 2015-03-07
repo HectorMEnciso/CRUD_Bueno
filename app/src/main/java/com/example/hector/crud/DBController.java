@@ -145,7 +145,7 @@ public class DBController extends SQLiteOpenHelper {
         return existe;
     }
 
-    public void GeneralXMl(ArrayList<HashMap<String, String>> map){
+    public void GenerarXMl(ArrayList<HashMap<String, String>> map){
         map=getAllCoches();
         int i=0;
         try {
