@@ -30,7 +30,6 @@ public class RssParserDom
 	
 	public RssParserDom(String file)
 	{
-		 //archivo = "/data/data/net.sgoliver.android.xml/files/"+file;
         archivo = file;
         Log.e("fichero",archivo.toString());
     }
@@ -43,7 +42,6 @@ public class RssParserDom
         {
             DocumentBuilder builder = factory.newDocumentBuilder();
 
-            //builder espera input stream hay que obtener a partir del file un input y pasarlo
             File f = new File(archivo);
             Document dom = builder.parse(f);
             Element root = dom.getDocumentElement();
@@ -100,15 +98,17 @@ public class RssParserDom
                     }
 
                 }
+                Log.e("Cocheeeeeeeeee","");
                 coches.add(coche);
             }
         } 
         catch (Exception ex) 
         {
             throw new RuntimeException(ex);
-        } 
-        
+        }
+        Log.e("numCoches",String.valueOf(coches.size()));
         return coches;
+
     }
 
 	private String obtenerTexto(Node dato)
