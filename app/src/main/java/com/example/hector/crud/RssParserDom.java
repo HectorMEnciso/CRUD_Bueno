@@ -96,9 +96,9 @@ public class RssParserDom
                         coche.setFechaCompra(dato.getFirstChild().getNodeValue());
                         queryValues.put("fechaCompra",coche.getFechaCompra());
                     }
-
+                    Log.e("Cocheeeeeeeeee","");
                 }
-                Log.e("Cocheeeeeeeeee","");
+                Log.e("Cocheeeeeeeeee22","");
                 coches.add(coche);
             }
         } 
