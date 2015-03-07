@@ -200,9 +200,9 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 controller.GeneralXMl(controller.getAllCoches());
                 return true;
             case R.id.Cargarxml:
-                coches.clear();
+
+                //coches.clear();
                 CargarXmlTask tarea = new CargarXmlTask();
-                // tarea.execute("http://212.170.237.10/rss/rss.aspx");
                 tarea.execute("http://10.0.2.2/Coches.xml");
 
                 for(int w=0;w<coches.size();w++){
@@ -231,21 +231,17 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 
     public void onResume(){
         super.onResume();
-        // btnInsertar.callOnClick();
+        Log.e("entroOnResume","");
         cochesList =  controller.getAllCoches();
-        /*for(int t=0;t<cochesList.size();t++){
-            Log.e("errorrrrrrrrrrr", cochesList.get(t).get("matricula"));
-            *//*txtResultado.append(noticiasList.get(t).get("title") + "\n" +
-                    noticiasList.get(t).get("link") + "\n" +
-                    noticiasList.get(t).get("description") + "\n" + noticiasList.get(t).get("guid") +
-                    noticiasList.get(t).get("pubDate"));*//*
-        }*/
+
         adaptador = new SimpleAdapter(MainActivity.this,cochesList, R.layout.mi_layout, new String[] { "id" ,"idfoto","matricula","marca","modelo","motorizacion","cilindrada","fechaCompra"}, new int[] {R.id.ID,R.id.ivContactImage, R.id.lblMatricula, R.id.lblMarca,R.id.lblModelo,R.id.lblMotorizacion,R.id.lblCilindrada,R.id.lblFechaCompra});
         lstCoches.setAdapter(adaptador);
     }
 
     public void onStop(){
         super.onStop();
+        Log.e("entroOnStop","");
+        Log.e("cocheSize onStop",String.valueOf(coches.size()));
         for(int i=0;i<coches.size();i++){
             {
                 String matricula= coches.get(i).getMatricula();
@@ -272,12 +268,13 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
             try {
                 Log.e("PreConnecting...", "");
                 sock = new Socket(SERVER, SOCKET_PORT);
-                Log.e("Connecting...", "");
+                Log.e("Conectando.........", sock.toString());
                 obtenerfichero();
 
                 RssParserDom saxparser = new RssParserDom(file);
 
                 coches = saxparser.parse();//parsear y guarda datos en lista de noticias
+                Log.e("cochesAsynTask",String.valueOf(coches.size()));
                 return true;
             }
             catch(IOException e) {
@@ -290,7 +287,9 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         }
         protected void onPostExecute(Boolean result) {
             Log.e("entro onPostExecute","onPostExecute");
+            Log.e("coches size",String.valueOf(coches.size()));
             for(int i=0; i<coches.size(); i++){
+                Log.e("entro for",String.valueOf(coches.size()));
                 HashMap<String, String> queryValues =  new  HashMap<String, String>();
                 queryValues.put("idfoto", String.valueOf(coches.get(i).getImageURI()));
                 queryValues.put("matricula", coches.get(i).getMatricula());
