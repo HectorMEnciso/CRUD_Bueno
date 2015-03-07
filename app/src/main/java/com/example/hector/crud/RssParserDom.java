@@ -32,6 +32,7 @@ public class RssParserDom
 	{
 		 //archivo = "/data/data/net.sgoliver.android.xml/files/"+file;
         archivo = file;
+        Log.e("fichero",archivo.toString());
     }
 
     public ArrayList<Coches> parse() {
