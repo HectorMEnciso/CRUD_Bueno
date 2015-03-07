@@ -287,7 +287,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         }
         protected void onPostExecute(Boolean result) {
             Log.e("entro onPostExecute","onPostExecute");
-            Log.e("coches size",String.valueOf(coches.size()));
+            Log.e("coches size onPostExecute",String.valueOf(coches.size()));
             for(int i=0; i<coches.size(); i++){
                 Log.e("entro for",String.valueOf(coches.size()));
                 HashMap<String, String> queryValues =  new  HashMap<String, String>();
