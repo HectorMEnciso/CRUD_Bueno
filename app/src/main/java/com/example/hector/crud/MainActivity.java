@@ -58,6 +58,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     BufferedOutputStream bos = null;
     String file="/data/data/com.example.hector.crud/files/Coches.xml";
     public final static int FILE_SIZE = 6022386;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -195,6 +196,9 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 return true;
             case R.id.GuardarBDOverflow:
                 return true;
+            case R.id.Generarxml:
+                controller.GeneralXMl(controller.getAllCoches());
+                return true;
             case R.id.Cargarxml:
                 coches.clear();
                 CargarXmlTask tarea = new CargarXmlTask();
@@ -264,13 +268,12 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     private class CargarXmlTask extends AsyncTask<String,Integer,Boolean> {
         @Override
         protected Boolean doInBackground(String... params)  {
+            Log.e("entro doInBackground","");
             try {
                 Log.e("PreConnecting...", "");
                 sock = new Socket(SERVER, SOCKET_PORT);
                 Log.e("Connecting...", "");
                 obtenerfichero();
-
-                //pasar file.
 
                 RssParserDom saxparser = new RssParserDom(file);
 
@@ -286,7 +289,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 
         }
         protected void onPostExecute(Boolean result) {
-
+            Log.e("entro onPostExecute","onPostExecute");
             for(int i=0; i<coches.size(); i++){
                 HashMap<String, String> queryValues =  new  HashMap<String, String>();
                 queryValues.put("idfoto", String.valueOf(coches.get(i).getImageURI()));

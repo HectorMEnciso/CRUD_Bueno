@@ -7,8 +7,22 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Text;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 /**
  * Created by Hector on 21/01/2015.
@@ -129,6 +143,71 @@ public class DBController extends SQLiteOpenHelper {
             existe = false;
         }
         return existe;
+    }
+
+    public void GeneralXMl(ArrayList<HashMap<String, String>> map){
+        map=getAllCoches();
+        int i=0;
+        try {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.newDocument();
+
+            doc.setXmlVersion("1.0");
+            Element raiz = doc.createElement("Coches");
+            doc.appendChild(raiz);
+
+            while(i<map.size()) {
+            Element coche = doc.createElement("coche");
+
+                Element idfoto = doc.createElement("idfoto");
+                Text textidfoto = doc.createTextNode(map.get(i).get("idfoto"));
+                idfoto.appendChild(textidfoto);
+                coche.appendChild(idfoto);
+
+                Element matricula = doc.createElement("matricula");
+                Text textmatricula = doc.createTextNode(map.get(i).get("matricula"));
+                matricula.appendChild(textmatricula);
+                coche.appendChild(matricula);
+
+                Element marca = doc.createElement("marca");
+                Text textmarca = doc.createTextNode(map.get(i).get("marca"));
+                marca.appendChild(textmarca);
+                coche.appendChild(marca);
+
+                Element modelo = doc.createElement("modelo");
+                Text textmodelo = doc.createTextNode(map.get(i).get("modelo"));
+                modelo.appendChild(textmodelo);
+                coche.appendChild(modelo);
+
+                Element motorizacion = doc.createElement("motorizacion");
+                Text textmotorizacion = doc.createTextNode(map.get(i).get("motorizacion"));
+                motorizacion.appendChild(textmotorizacion);
+                coche.appendChild(motorizacion);
+
+                Element cilindrada = doc.createElement("cilindrada");
+                Text textcilindrada = doc.createTextNode(map.get(i).get("cilindrada"));
+                cilindrada.appendChild(textcilindrada);
+                coche.appendChild(cilindrada);
+
+                Element fechaCompra = doc.createElement("fechaCompra");
+                Text textfechaCompra = doc.createTextNode(map.get(i).get("fechaCompra"));
+                fechaCompra.appendChild(textfechaCompra);
+                coche.appendChild(fechaCompra);
+
+                doc.getDocumentElement().appendChild(coche);
+                i++;
+            }
+            Source source = new DOMSource(doc);
+            Result result = new StreamResult(new File("/data/data/com.example.hector.crud/files/CochesGenerate.xml"));
+
+            // Transformación del Document al fichero
+            Transformer trans = TransformerFactory.newInstance().newTransformer();
+            trans.transform(source, result);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
