@@ -200,11 +200,10 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 controller.GenerarXMl(controller.getAllCoches());
                 return true;
             case R.id.Cargarxml:
-
                 //coches.clear();
                 CargarXmlTask tarea = new CargarXmlTask();
                 tarea.execute("http://10.0.2.2/Coches.xml");
-
+                Log.e("valorCoches",String.valueOf(coches.size()));
                 for(int w=0;w<coches.size();w++){
                     {
                         String matricula= coches.get(w).getMatricula();
