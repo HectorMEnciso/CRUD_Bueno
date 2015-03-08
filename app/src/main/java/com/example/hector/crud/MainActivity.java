@@ -219,7 +219,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         lstCoches.setAdapter(adaptador);
     }
 
-    public void onStop(){
+    /*public void onStop(){
         super.onStop();
         Log.e("entroOnStop","");
         Log.e("cocheSize onStop",String.valueOf(coches.size()));
@@ -240,7 +240,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 }
             }
         }
-    }
+    }*/
 
     private class CargarXmlTask extends AsyncTask<String,Integer,Boolean> {
         @Override
@@ -277,6 +277,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 if (!controller.existeCoche(matricula)) {
                     HashMap<String, String> queryValues = new HashMap<String, String>();
                     queryValues.put("idfoto", String.valueOf(coches.get(i).getImageURI()));
+                    Log.e("idfoto", coches.get(i).getImageURI().toString());
                     queryValues.put("matricula", coches.get(i).getMatricula());
                     queryValues.put("marca", coches.get(i).getMarca());
                     queryValues.put("modelo", coches.get(i).getModelo());
