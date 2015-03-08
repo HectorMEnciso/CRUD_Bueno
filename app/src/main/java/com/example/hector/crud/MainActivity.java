@@ -203,24 +203,6 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 //coches.clear();
                 CargarXmlTask tarea = new CargarXmlTask();
                 tarea.execute("http://10.0.2.2/Coches.xml");
-                Log.e("valorCoches",String.valueOf(coches.size()));
-                for(int w=0;w<coches.size();w++){
-                    {
-                        String matricula= coches.get(w).getMatricula();
-
-                        if (!controller.existeCoche(matricula)){
-                            HashMap<String, String> queryValues =  new  HashMap<String, String>();
-                            queryValues.put("idfoto",String.valueOf(coches.get(w).getImageURI()));
-                            queryValues.put("matricula",coches.get(w).getMatricula());
-                            queryValues.put("marca",coches.get(w).getMarca());
-                            queryValues.put("modelo",coches.get(w).getModelo());
-                            queryValues.put("motorizacion",coches.get(w).getMotorizacion());
-                            queryValues.put("cilindrada",coches.get(w).getCilindrada());
-                            queryValues.put("fechaCompra",coches.get(w).getFechaCompra());
-                            controller.insertCoche(queryValues);
-                        }
-                    }
-                }
 
                 return true;
             default:
@@ -285,22 +267,31 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 
         }
         protected void onPostExecute(Boolean result) {
+            int cochesRepetidos=0;
             Log.e("entro onPostExecute","onPostExecute");
             Log.e("coches size onPostExecute",String.valueOf(coches.size()));
             for(int i=0; i<coches.size(); i++){
                 Log.e("entro for",String.valueOf(coches.size()));
-                HashMap<String, String> queryValues =  new  HashMap<String, String>();
-                queryValues.put("idfoto", String.valueOf(coches.get(i).getImageURI()));
-                queryValues.put("matricula", coches.get(i).getMatricula());
-                queryValues.put("marca", coches.get(i).getMarca());
-                queryValues.put("modelo", coches.get(i).getModelo());
-                queryValues.put("cilindrada", coches.get(i).getCilindrada());
-                queryValues.put("motorizacion",coches.get(i).getMotorizacion());
-                queryValues.put("fechaCompra",coches.get(i).getFechaCompra());
-                controller.insertCoche(queryValues);
-                Intent objIntent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(objIntent);
+
+                String matricula= coches.get(i).getMatricula();
+                if (!controller.existeCoche(matricula)) {
+                    HashMap<String, String> queryValues = new HashMap<String, String>();
+                    queryValues.put("idfoto", String.valueOf(coches.get(i).getImageURI()));
+                    queryValues.put("matricula", coches.get(i).getMatricula());
+                    queryValues.put("marca", coches.get(i).getMarca());
+                    queryValues.put("modelo", coches.get(i).getModelo());
+                    queryValues.put("cilindrada", coches.get(i).getCilindrada());
+                    queryValues.put("motorizacion", coches.get(i).getMotorizacion());
+                    queryValues.put("fechaCompra", coches.get(i).getFechaCompra());
+                    controller.insertCoche(queryValues);
+                    Intent objIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(objIntent);
+                }
+                else {
+                    cochesRepetidos++;
+                }
             }
+            Toast.makeText(getApplicationContext(),cochesRepetidos+" ya se encuentran y no se actualizarán.",Toast.LENGTH_SHORT).show();
         }
     }
 
