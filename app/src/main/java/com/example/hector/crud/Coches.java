@@ -2,14 +2,8 @@ package com.example.hector.crud;
 
 import android.net.Uri;
 
-/**
- * Created by Hector on 28/12/2014.
- */
 public class Coches {
     private int id;
-
-
-
     private String Matricula;
     private String Marca;
     private String Modelo;
@@ -17,9 +11,6 @@ public class Coches {
     private String Cilindrada;
     private String FechaCompra;
     private Uri ImageURI;
-    /*public Coches() {
-
-    }*/
 
     public String getMatricula() {
         return Matricula;
