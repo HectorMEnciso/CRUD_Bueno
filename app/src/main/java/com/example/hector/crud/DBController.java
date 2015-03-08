@@ -37,7 +37,7 @@ public class DBController extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database) {
         String query;
-        query = "CREATE TABLE Coches (id integer PRIMARY KEY AUTOINCREMENT,idfoto INTEGER, matricula TEXT,marca TEXT, modelo TEXT,motorizacion TEXT, cilindrada INTEGER,fechaCompra TEXT)";
+        query = "CREATE TABLE Coches (id integer PRIMARY KEY AUTOINCREMENT,idfoto TEXT, matricula TEXT,marca TEXT, modelo TEXT,motorizacion TEXT, cilindrada INTEGER,fechaCompra TEXT)";
         database.execSQL(query);
         Log.d(LOGCAT,"Coches Created");
     }
@@ -146,7 +146,6 @@ public class DBController extends SQLiteOpenHelper {
     }
 
     public void GenerarXMl(ArrayList<HashMap<String, String>> map){
-       // map=getAllCoches();
         int i=0;
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

@@ -1,6 +1,7 @@
 package com.example.hector.crud;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -32,6 +33,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -63,6 +65,18 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);//Cargamos layout
+        try
+        {
+            OutputStreamWriter fout=
+                    new OutputStreamWriter(
+                            openFileOutput("prueba_int.txt", Context.MODE_PRIVATE));
+            fout.write("Texto de prueba.");
+            fout.close();
+        }
+        catch (Exception ex)
+        {
+            Log.e("Ficheros", "Error al escribir fichero a memoria interna");
+        }
         cochesList =  controller.getAllCoches();
       //  adaptador = new adaptadorCoches(this, datos);//Instanciación del adaptador al que le pasamos el arralist con los datos datos.
         lstCoches = (ListView) findViewById(R.id.LstOpciones);//Obtenemos la referencia al listView
