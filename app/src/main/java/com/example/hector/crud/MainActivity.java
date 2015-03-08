@@ -292,7 +292,10 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                     cochesRepetidos++;
                 }
             }
-            Toast.makeText(getApplicationContext(),cochesRepetidos+" ya se encuentran y no se actualizarán.",Toast.LENGTH_SHORT).show();
+            if(cochesRepetidos>0){
+                Toast.makeText(getApplicationContext(),cochesRepetidos+" ya se encuentran y no se actualizarán.",Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 
