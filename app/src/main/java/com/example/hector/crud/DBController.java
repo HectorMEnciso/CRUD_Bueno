@@ -146,7 +146,7 @@ public class DBController extends SQLiteOpenHelper {
     }
 
     public void GenerarXMl(ArrayList<HashMap<String, String>> map){
-        map=getAllCoches();
+       // map=getAllCoches();
         int i=0;
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
