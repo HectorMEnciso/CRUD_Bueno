@@ -40,6 +40,7 @@ public class RssParserDom
             Element root = dom.getDocumentElement();
             Log.e("entroDoc","");
             NodeList items = root.getElementsByTagName("Coche");
+            //NodeList items = root.getElementsByTagName("row");
             Log.e("entroROOT",String.valueOf(items.getLength()));
             for (int i=0; i<items.getLength(); i++)
             {
@@ -53,14 +54,19 @@ public class RssParserDom
                 {
                     Node dato = datosCoches.item(j);
                     String etiqueta = dato.getNodeName();
+
+
                     Log.e("prueba",etiqueta.toString());
-                   if (etiqueta.equals("idfoto"))
-                    {
+                  if (etiqueta.equals("idfoto"))
+                  {
+
                         coche.setImageURI(Uri.parse(dato.getFirstChild().getNodeValue()));
+
                         queryValues.put("idfoto", coche.getImageURI().toString());
                         Log.e("idfoto", coche.getImageURI().toString());
                     } 
                     else if (etiqueta.equals("matricula"))
+
                     {
                         String texto = obtenerTexto(dato);
 
@@ -69,29 +75,34 @@ public class RssParserDom
                         Log.e("matricula", coche.getMatricula().toString());
                     } 
                     else if (etiqueta.equals("marca"))
+
                     {
                         coche.setMarca(dato.getFirstChild().getNodeValue());
                         queryValues.put("marca",coche.getMarca());
                         Log.e("marca", coche.getMarca().toString());
                     }
                     else if (etiqueta.equals("modelo"))
+
                     {
                         coche.setModelo(dato.getFirstChild().getNodeValue());
                         queryValues.put("modelo", coche.getModelo());
                         Log.e("modelo", coche.getModelo().toString());
                     }
-                    else if (etiqueta.equals("motorizacion"))
+                   else if (etiqueta.equals("motorizacion"))
+
                     {
                         coche.setMotorizacion(dato.getFirstChild().getNodeValue());
                         queryValues.put("motorizacion", coche.getMotorizacion());
                         Log.e("motorizacion", coche.getMotorizacion().toString());
                     }
+
                     else if (etiqueta.equals("cilindrada"))
                     {
                         coche.setCilindrada(dato.getFirstChild().getNodeValue());
                         queryValues.put("cilindrada", coche.getCilindrada());
                         Log.e("cilindrada", coche.getCilindrada().toString());
                     }
+
                     else if (etiqueta.equals("fechaCompra"))
                     {
                         coche.setFechaCompra(dato.getFirstChild().getNodeValue());
