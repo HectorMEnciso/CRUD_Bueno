@@ -157,13 +157,15 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-
+        ID=(TextView) findViewById(R.id.ID);
         MenuInflater inflater = getMenuInflater();
-
+        HashMap<String, String> c;
         if (v.getId() == R.id.LstOpciones) {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+             c=controller.getCocheInfo(ID.getText().toString());
+            Log.e("IDBorrar",c.get("matricula"));
 
-            menu.setHeaderTitle("SE BORRARÁ EL VEHICULO CON MATRÍCULA: "+cochesList.get(info.position).get("matricula"));
+            menu.setHeaderTitle("SE BORRARÁ EL VEHICULO CON MATRÍCULA: "+c.get("matricula"));
 
             inflater.inflate(R.menu.opciones_elementos, menu);
         }
@@ -172,17 +174,21 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         final TextView ID=(TextView) info.targetView.findViewById(R.id.ID);
+        HashMap<String, String> co;
         switch (item.getItemId()) {
             case R.id.EliminarSeleccionada:
                 posi = info.position;
-                String dataCarDelete="¡COCHE ELIMINADO!\n";
-                dataCarDelete=dataCarDelete+"MATRICULA: "+cochesList.get(posi).get("matricula")+"\nMARCA: "+cochesList.get(posi).get("marca")+"\nMODELO: "+cochesList.get(posi).get("modelo");
-                Toast.makeText(getBaseContext(),dataCarDelete, Toast.LENGTH_LONG).show();
-                String CocheId = ID.getText().toString();
-                controller.deleteCoche(CocheId);
+                String dataCarDelete="";
+                co=controller.getCocheInfo(ID.getText().toString());
+                controller.deleteCoche(ID.getText().toString());
                 cochesList.remove(posi);
-                dataCarDelete="";
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
+                dataCarDelete="¡COCHE ELIMINADO!\n";
+                dataCarDelete=dataCarDelete+"MATRICULA: "+co.get("matricula")+"\nMARCA: "+co.get("marca")+"\nMODELO: "+co.get("modelo");
+                /*Actualizar actividad principal*/
+                Toast.makeText(getBaseContext(),dataCarDelete, Toast.LENGTH_LONG).show();
+                Intent objIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(objIntent);
                 return true;
             default:
                 break;
