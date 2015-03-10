@@ -38,7 +38,7 @@ public class AddActivity extends Activity {
     private String opnSpinner;
     ImageView contactImageImgView;
 
-    Uri imageUri;//Uri.parse("android.resource://com.example.hector.crud/drawable/car.png");
+    Uri imageUri;
 
     DBController controller = new DBController(this);
 
@@ -105,7 +105,6 @@ public class AddActivity extends Activity {
         String fecha=dia+"/"+mes+"/"+anno;
 
         if(!entroGaleria) {
-            //imageUri = Uri.parse("android.resource://com.example.hector.crud/drawable/car.png");
             imageUri = Uri.parse(String.valueOf(R.drawable.car));
             entroGaleria=false;
         }

@@ -43,15 +43,13 @@ import java.util.HashMap;
 public class MainActivity extends Activity implements SearchView.OnQueryTextListener {
     private SearchView mSearchView; //Declaracion global del SearchView sSearchView
     private ListView lstCoches; //Declaracion GLobal del listView lstCoches.
-    //adaptadorCoches adaptador; //Declaracion global del adapdatorCoches adaptador.
-    //private ArrayList<Coches> datos = new ArrayList<Coches>();//Declaracion global del ArrayList<Coches> datos.
     private TextView ID;
     int posi,x; //Variables globales para las posiciones.
     DBController controller = new DBController(this);
     SimpleAdapter adaptador;
     ArrayList<HashMap<String, String>> cochesList;
     private ArrayList<Coches> coches= new ArrayList<Coches>();
-    HashMap<String, String> queryValues =  new  HashMap<String, String>();
+    //HashMap<String, String> queryValues =  new  HashMap<String, String>();
 
     public final static int SOCKET_PORT = 6000;
    // public final static String SERVER = "10.0.2.2";  // localhost
@@ -79,7 +77,6 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
             Log.e("Ficheros", "Error al escribir fichero a memoria interna");
         }
         cochesList =  controller.getAllCoches();
-      //  adaptador = new adaptadorCoches(this, datos);//Instanciación del adaptador al que le pasamos el arralist con los datos datos.
         lstCoches = (ListView) findViewById(R.id.LstOpciones);//Obtenemos la referencia al listView
         lstCoches.setAdapter(adaptador);//añadimos el adaptador al listView lstCoches.
         lstCoches.setTextFilterEnabled(true);//Habilitamos la busqueda en el listView lstCoches
