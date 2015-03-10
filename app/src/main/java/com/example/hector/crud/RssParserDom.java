@@ -40,7 +40,6 @@ public class RssParserDom
             Element root = dom.getDocumentElement();
 
             NodeList items = root.getElementsByTagName("Coche");
-             //NodeList items = root.getElementsByTagName("row");
 
             for (int i=0; i<items.getLength(); i++)
             {
