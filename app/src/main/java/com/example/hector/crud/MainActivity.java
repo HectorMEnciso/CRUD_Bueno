@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -16,31 +14,25 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class MainActivity extends Activity implements SearchView.OnQueryTextListener {
+
     private SearchView mSearchView; //Declaracion global del SearchView sSearchView
     private ListView lstCoches; //Declaracion GLobal del listView lstCoches.
     private TextView ID;
@@ -49,11 +41,9 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     SimpleAdapter adaptador;
     ArrayList<HashMap<String, String>> cochesList;
     private ArrayList<Coches> coches= new ArrayList<Coches>();
-    //HashMap<String, String> queryValues =  new  HashMap<String, String>();
 
     public final static int SOCKET_PORT = 6000;
-   // public final static String SERVER = "10.0.2.2";  // localhost
-   public final static String SERVER = "192.168.1.4";  // localhost
+    public final static String SERVER = "192.168.1.4";  // localhost
     Socket sock = null;
     FileOutputStream fos = null;
     BufferedOutputStream bos = null;
@@ -66,10 +56,9 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         setContentView(R.layout.activity_main);//Cargamos layout
         try
         {
-            OutputStreamWriter fout=
-                    new OutputStreamWriter(
-                            openFileOutput("prueba_int.txt", Context.MODE_PRIVATE));
+            OutputStreamWriter fout= new OutputStreamWriter(openFileOutput("prueba_int.txt", Context.MODE_PRIVATE));
             fout.write("Texto de prueba.");
+            /*Utilizado para forzar la creacion de la carpeta files, si no podria dar algun problema.*/
             fout.close();
         }
         catch (Exception ex)
@@ -106,7 +95,6 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                             x = k;//Guardamos aquella posicion cuyo elemento coincida.
                         }
                     }
-
                // Pasamos todos los datos del elemento al editActivity
                     data.putExtra("id", cochesList.get(x).get("id"));
                     data.putExtra("Matricula", cochesList.get(x).get("matricula").toString());
@@ -216,16 +204,13 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 return super.onOptionsItemSelected(item);
         }
     }
-
     public void onResume(){
         super.onResume();
         Log.e("entroOnResume","");
         cochesList =  controller.getAllCoches();
-
         adaptador = new SimpleAdapter(MainActivity.this,cochesList, R.layout.mi_layout, new String[] { "id" ,"idfoto","matricula","marca","modelo","motorizacion","cilindrada","fechaCompra"}, new int[] {R.id.ID,R.id.ivContactImage, R.id.lblMatricula, R.id.lblMarca,R.id.lblModelo,R.id.lblMotorizacion,R.id.lblCilindrada,R.id.lblFechaCompra});
         lstCoches.setAdapter(adaptador);
     }
-
     private class CargarXmlTask extends AsyncTask<String,Integer,Boolean> {
         @Override
         protected Boolean doInBackground(String... params)  {
