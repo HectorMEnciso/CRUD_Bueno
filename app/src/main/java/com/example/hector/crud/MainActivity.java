@@ -205,18 +205,12 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 startActivity(objIntent1);
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
                 return true;
-            case R.id.GuardarBD:
-                return true;
-            case R.id.GuardarBDOverflow:
-                return true;
             case R.id.Generarxml:
                 controller.GenerarXMl(controller.getAllCoches());
                 return true;
             case R.id.Cargarxml:
-                //coches.clear();
                 CargarXmlTask tarea = new CargarXmlTask();
                 tarea.execute("http://10.0.2.2/Coches.xml");
-
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
