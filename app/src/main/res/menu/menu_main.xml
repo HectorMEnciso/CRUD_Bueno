@@ -17,24 +17,24 @@
                 android:title="Añadir"></item>
             <item
                 android:id="@+id/BorrarTodas"
-                android:icon="@android:drawable/ic_delete"
+                android:icon="@android:drawable/ic_menu_delete"
                 android:title="Borrar todos"></item>
 
             <item
                 android:id="@+id/Cargarxml"
                 android:icon="@android:drawable/ic_menu_add"
                 android:showAsAction="never"
-                android:title="Cargar xml"></item>
+                android:title="Cargar XML"></item>
             <item
                 android:id="@+id/apache"
-                android:icon="@android:drawable/ic_menu_add"
+                android:icon="@android:drawable/stat_notify_sync"
                 android:showAsAction="never"
-                android:title="apache"></item>
+                android:title="Cargar de Apache"></item>
             <item
                 android:id="@+id/Generarxml"
-                android:icon="@android:drawable/ic_menu_add"
+                android:icon="@android:drawable/ic_menu_set_as"
                 android:showAsAction="never"
-                android:title="Genera xml"></item>
+                android:title="Generar XML"></item>
 
         </menu>
     </item>
