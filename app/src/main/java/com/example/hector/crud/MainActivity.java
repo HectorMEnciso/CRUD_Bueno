@@ -159,14 +159,9 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         super.onCreateContextMenu(menu, v, menuInfo);
         ID=(TextView) findViewById(R.id.ID);
         MenuInflater inflater = getMenuInflater();
-        HashMap<String, String> c;
+
         if (v.getId() == R.id.LstOpciones) {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-             c=controller.getCocheInfo(ID.getText().toString());
-            Log.e("IDBorrar",c.get("matricula"));
-
-            menu.setHeaderTitle("SE BORRARÁ EL VEHICULO CON MATRÍCULA: "+c.get("matricula"));
-
             inflater.inflate(R.menu.opciones_elementos, menu);
         }
     }
