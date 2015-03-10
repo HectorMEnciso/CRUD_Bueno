@@ -107,7 +107,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                     Log.e("rrrrr",cochesList.get(x).get("idfoto").toString());
                     data.putExtra("Position", x);//mando la posicion correcta del elemento buscado.
                     Log.e("posClick", String.valueOf(x));
-                    startActivityForResult(data, 2);
+                    startActivity(data);
                 }
             });
             adaptador = new SimpleAdapter(MainActivity.this,cochesList, R.layout.mi_layout, new String[] { "id" ,"idfoto","matricula","marca","modelo","motorizacion","cilindrada","fechaCompra"}, new int[] {R.id.ID,R.id.ivContactImage, R.id.lblMatricula, R.id.lblMarca,R.id.lblModelo,R.id.lblMotorizacion,R.id.lblCilindrada,R.id.lblFechaCompra});
