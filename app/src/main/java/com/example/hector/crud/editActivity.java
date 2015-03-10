@@ -36,7 +36,7 @@ public class editActivity extends Activity {
     DBController controller = new DBController(this);
     HashMap<String, String> CochesList;
     String moto,fecha;
-    Uri imageUri;// = Uri.parse("android.resource://com.example.hector.crud/drawable/car.png");
+    Uri imageUri;
     ImageView contactImageImgView;
     int posMoto;
     @Override
@@ -69,7 +69,6 @@ public class editActivity extends Activity {
              Log.e("else","entro else");
              contactImageImgView.setImageURI(Uri.parse(CochesList.get("idfoto")));
          }
-        //contactImageImgView.setImageURI(Uri.parse(CochesList.get("idfoto")));
         Matricula.setText(CochesList.get("matricula"));
         Marca.setText(CochesList.get("marca"));
         Modelo.setText(CochesList.get("modelo"));
@@ -174,10 +173,9 @@ public class editActivity extends Activity {
         cilindrada=getIntent().getStringExtra("Cilindrada");
 
         if(!entroGaleria){
-            Log.e("entroGaleria","");
+
             imageUri = Uri.parse(getIntent().getStringExtra("Imagen"));
-          // imageUri = Uri.parse(String.valueOf(R.drawable.car));
-            Log.e("valorrrr",imageUri.toString());
+
             entroGaleria=false;
         }
 
@@ -219,7 +217,7 @@ public class editActivity extends Activity {
             }
 
         });
-       //contactImageImgView.setImageURI(imageUri);
+
     }
 
 }

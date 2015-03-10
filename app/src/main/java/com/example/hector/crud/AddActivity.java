@@ -37,7 +37,6 @@ public class AddActivity extends Activity {
     boolean entroGaleria=false;
     private String opnSpinner;
     ImageView contactImageImgView;
-
     Uri imageUri;
 
     DBController controller = new DBController(this);
@@ -54,7 +53,6 @@ public class AddActivity extends Activity {
         Cilindrada=(EditText)findViewById(R.id.entradaCilindrada);
         reset=(Button)findViewById(R.id.btnReset);
         FechaCompra=(DatePicker)findViewById(R.id.datePicker);
-        reset=(Button)findViewById(R.id.btnReset);
         contactImageImgView = (ImageView) findViewById(R.id.imgViewContactImage);
 
         ArrayAdapter<String> adap=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,datos);

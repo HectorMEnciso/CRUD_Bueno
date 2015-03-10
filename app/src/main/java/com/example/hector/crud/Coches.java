@@ -3,7 +3,6 @@ package com.example.hector.crud;
 import android.net.Uri;
 
 public class Coches {
-    private int id;
     private String Matricula;
     private String Marca;
     private String Modelo;
@@ -61,28 +60,10 @@ public class Coches {
     }
 
     public Uri getImageURI() { return ImageURI; }
+
     public void setImageURI(Uri imageURI) {
         ImageURI = imageURI;
     }
-
-    public int getIdentificador(){
-        return id;
-    }
-    public void setIdentificador(int id) {
-        this.id = id;
-    }
-
-    /*public Coches(int id,String matricula, String marca, String modelo, String motorizacion, String cilindrada, String fechaCompra, Uri imageURI) {
-        this.id=id;
-        Matricula = matricula;
-        Marca = marca;
-        Modelo = modelo;
-        Motorizacion = motorizacion;
-        Cilindrada = cilindrada;
-        FechaCompra = fechaCompra;
-        ImageURI = imageURI;
-    }*/
-
     public String toString() {
         return (getMatricula() + "\n" + getMarca() + "\n" + getModelo() + "\n" + getMotorizacion() +"\n"+ getCilindrada() + "\n" + getFechaCompra()+ "\n" + getImageURI());
     }
