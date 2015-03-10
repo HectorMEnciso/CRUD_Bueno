@@ -226,29 +226,6 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         lstCoches.setAdapter(adaptador);
     }
 
-    /*public void onStop(){
-        super.onStop();
-        Log.e("entroOnStop","");
-        Log.e("cocheSize onStop",String.valueOf(coches.size()));
-        for(int i=0;i<coches.size();i++){
-            {
-                String matricula= coches.get(i).getMatricula();
-
-                if (!controller.existeCoche(matricula)){
-                    HashMap<String, String> queryValues =  new  HashMap<String, String>();
-                    queryValues.put("idfoto",String.valueOf(coches.get(i).getImageURI()));
-                    queryValues.put("matricula",coches.get(i).getMatricula());
-                    queryValues.put("marca",coches.get(i).getMarca());
-                    queryValues.put("modelo",coches.get(i).getModelo());
-                    queryValues.put("motorizacion",coches.get(i).getMotorizacion());
-                    queryValues.put("cilindrada",coches.get(i).getCilindrada());
-                    queryValues.put("fechaCompra",coches.get(i).getFechaCompra());
-                    controller.insertCoche(queryValues);
-                }
-            }
-        }
-    }*/
-
     private class CargarXmlTask extends AsyncTask<String,Integer,Boolean> {
         @Override
         protected Boolean doInBackground(String... params)  {
@@ -266,12 +243,8 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 return true;
             }
             catch(IOException e) {
-                 /*if (fos != null) fos.close();
-                 if (bos != null) bos.close();
-                 if (sock != null) sock.close();*/
             }
             return true;
-
         }
         protected void onPostExecute(Boolean result) {
             int cochesRepetidos=0;
