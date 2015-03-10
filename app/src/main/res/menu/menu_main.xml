@@ -22,7 +22,7 @@
 
             <item
                 android:id="@+id/Cargarxml"
-                android:icon="@android:drawable/ic_menu_add"
+                android:icon="@android:drawable/ic_menu_rotate"
                 android:showAsAction="never"
                 android:title="Cargar XML"></item>
             <item

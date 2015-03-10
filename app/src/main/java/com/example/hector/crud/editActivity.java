@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class editActivity extends Activity {
     private DatePicker FechaCompra;
     private String opnSpinner;
     boolean entroGaleria=false;
+
 
     DBController controller = new DBController(this);
     HashMap<String, String> CochesList;
