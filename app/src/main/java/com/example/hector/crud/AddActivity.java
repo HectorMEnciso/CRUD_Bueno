@@ -38,7 +38,6 @@ public class AddActivity extends Activity {
     private String opnSpinner;
     ImageView contactImageImgView;
     Uri imageUri;
-
     DBController controller = new DBController(this);
 
     @Override
