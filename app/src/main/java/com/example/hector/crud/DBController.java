@@ -49,7 +49,7 @@ public class DBController extends SQLiteOpenHelper {
         onCreate(database);
     }
 
-    public void insertCoche(HashMap<String, String> queryValues) {
+    public void insertCoche(HashMap<String, String> queryValues ) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("idfoto", queryValues.get("idfoto"));
