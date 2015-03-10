@@ -174,7 +174,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
             case R.id.EliminarSeleccionada:
                 posi = info.position;
                 String dataCarDelete="";
-                co=controller.getCocheInfo(ID.getText().toString());
+                co=controller.getCocheInfo  (ID.getText().toString());
                 controller.deleteCoche(ID.getText().toString());
                 cochesList.remove(posi);
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
