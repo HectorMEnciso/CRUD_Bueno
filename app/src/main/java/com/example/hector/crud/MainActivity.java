@@ -54,7 +54,8 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     HashMap<String, String> queryValues =  new  HashMap<String, String>();
 
     public final static int SOCKET_PORT = 6000;
-    public final static String SERVER = "10.0.2.2";  // localhost
+   // public final static String SERVER = "10.0.2.2";  // localhost
+   public final static String SERVER = "192.168.1.4";  // localhost
     Socket sock = null;
     FileOutputStream fos = null;
     BufferedOutputStream bos = null;
