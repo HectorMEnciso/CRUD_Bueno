@@ -193,12 +193,16 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 startActivity(objIntent1);
                 adaptador.notifyDataSetChanged();//Refresca adaptador.
                 return true;
+            case R.id.apache:
+                CargarApacheXMLTask tareaApache = new CargarApacheXMLTask();
+                tareaApache.execute("http://10.0.2.2/Coches.xml");
+                return true;
             case R.id.Generarxml:
                 controller.GenerarXMl(controller.getAllCoches());
                 return true;
             case R.id.Cargarxml:
                 CargarXmlTask tarea = new CargarXmlTask();
-                tarea.execute("http://10.0.2.2/Coches.xml");
+                tarea.execute();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -211,9 +215,9 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
         adaptador = new SimpleAdapter(MainActivity.this,cochesList, R.layout.mi_layout, new String[] { "id" ,"idfoto","matricula","marca","modelo","motorizacion","cilindrada","fechaCompra"}, new int[] {R.id.ID,R.id.ivContactImage, R.id.lblMatricula, R.id.lblMarca,R.id.lblModelo,R.id.lblMotorizacion,R.id.lblCilindrada,R.id.lblFechaCompra});
         lstCoches.setAdapter(adaptador);
     }
-    private class CargarXmlTask extends AsyncTask<String,Integer,Boolean> {
+    private class CargarXmlTask extends AsyncTask<Void,Integer,Boolean> {
         @Override
-        protected Boolean doInBackground(String... params)  {
+        protected Boolean doInBackground(Void... params)  {
             Log.e("entro doInBackground","");
             try {
                 Log.e("PreConnecting...", "");
@@ -228,6 +232,55 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                 return true;
             }
             catch(IOException e) {
+            }
+            return true;
+        }
+        protected void onPostExecute(Boolean result) {
+            int cochesRepetidos=0;
+            Log.e("entro onPostExecute","onPostExecute");
+            Log.e("coches size onPostExecute",String.valueOf(coches.size()));
+            for(int i=0; i<coches.size(); i++){
+                Log.e("entro for",String.valueOf(coches.size()));
+
+                String matricula= coches.get(i).getMatricula();
+                if (!controller.existeCoche(matricula)) {
+                    HashMap<String, String> queryValues = new HashMap<String, String>();
+                    queryValues.put("idfoto", String.valueOf(coches.get(i).getImageURI()));
+                    Log.e("idfoto", coches.get(i).getImageURI().toString());
+                    queryValues.put("matricula", coches.get(i).getMatricula());
+                    queryValues.put("marca", coches.get(i).getMarca());
+                    queryValues.put("modelo", coches.get(i).getModelo());
+                    queryValues.put("cilindrada", coches.get(i).getCilindrada());
+                    queryValues.put("motorizacion", coches.get(i).getMotorizacion());
+                    queryValues.put("fechaCompra", coches.get(i).getFechaCompra());
+                    controller.insertCoche(queryValues);
+                    Intent objIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(objIntent);
+                }
+                else {
+                    cochesRepetidos++;
+                }
+            }
+            if(cochesRepetidos>0){
+                Toast.makeText(getApplicationContext(),cochesRepetidos+" ya se encuentran y no se actualizarán.",Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
+
+    private class CargarApacheXMLTask extends AsyncTask<String,Integer,Boolean> {
+        @Override
+        protected Boolean doInBackground(String... params)  {
+            Log.e("entro doInBackground","");
+            try {
+
+                RssParserDomApache saxparser = new RssParserDomApache(params[0]);
+
+                coches = saxparser.parse();//parsear y guarda datos en lista de noticias
+                Log.e("cochesAsynTask",String.valueOf(coches.size()));
+                return true;
+            }
+            catch(Exception e) {
             }
             return true;
         }

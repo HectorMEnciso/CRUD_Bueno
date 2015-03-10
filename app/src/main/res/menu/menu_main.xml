@@ -26,6 +26,11 @@
                 android:showAsAction="never"
                 android:title="Cargar xml"></item>
             <item
+                android:id="@+id/apache"
+                android:icon="@android:drawable/ic_menu_add"
+                android:showAsAction="never"
+                android:title="apache"></item>
+            <item
                 android:id="@+id/Generarxml"
                 android:icon="@android:drawable/ic_menu_add"
                 android:showAsAction="never"
