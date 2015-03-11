@@ -196,6 +196,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
             case R.id.apache:
                 CargarApacheXMLTask tareaApache = new CargarApacheXMLTask();
                 tareaApache.execute("http://10.0.2.2/Coches.xml");
+                //tareaApache.execute("http://192.168.1.4:80/Coches.xml");
                 return true;
             case R.id.Generarxml:
                 controller.GenerarXMl(controller.getAllCoches());
@@ -211,6 +212,8 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     public void onResume(){
         super.onResume();
         Log.e("entroOnResume","");
+        mSearchView.setQuery("",false);
+        mSearchView.clearFocus();
         cochesList =  controller.getAllCoches();
         adaptador = new SimpleAdapter(MainActivity.this,cochesList, R.layout.mi_layout, new String[] { "id" ,"idfoto","matricula","marca","modelo","motorizacion","cilindrada","fechaCompra"}, new int[] {R.id.ID,R.id.ivContactImage, R.id.lblMatricula, R.id.lblMarca,R.id.lblModelo,R.id.lblMotorizacion,R.id.lblCilindrada,R.id.lblFechaCompra});
         lstCoches.setAdapter(adaptador);
