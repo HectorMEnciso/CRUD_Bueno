@@ -116,7 +116,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     }
 
     private void setupSearchView() {
-        mSearchView.setIconifiedByDefault(false); //Define el estado del campo de busqueda.
+        mSearchView.setIconifiedByDefault(true); //Define el estado del campo de busqueda.
         mSearchView.setOnQueryTextListener(this);//Define un escuchador para para las acciones dentro del searchView
         mSearchView.setSubmitButtonEnabled(true);//Habilita el boton Submit cuando no esta vacia.
         mSearchView.setQueryHint("Introduzca matricula....");//Texto a mostrar.
