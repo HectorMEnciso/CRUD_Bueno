@@ -157,6 +157,7 @@ public class editActivity extends Activity {
                 imageUri = data.getData();
 
                 contactImageImgView.setImageURI(imageUri);
+                entroGaleria=true;
             }
         }
     }
@@ -215,7 +216,7 @@ public class editActivity extends Activity {
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Contact Image"), 1);
-                entroGaleria=true;
+               // entroGaleria=true;
             }
 
         });
