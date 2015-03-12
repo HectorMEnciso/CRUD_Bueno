@@ -76,7 +76,7 @@ public class AddActivity extends Activity {
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Contact Image"), 1);
-                entroGaleria=true;
+             //   entroGaleria=true;
             }
 
         });
@@ -91,6 +91,7 @@ public class AddActivity extends Activity {
                 imageUri = data.getData();
                 Log.e("Imagen", imageUri.toString());
                 contactImageImgView.setImageURI(imageUri);
+                entroGaleria=true;
             }
         }
     }
@@ -101,12 +102,12 @@ public class AddActivity extends Activity {
         anno=FechaCompra.getYear();
         String fecha=dia+"/"+mes+"/"+anno;
 
-        if(!entroGaleria) {
+        if(!entroGaleria && imageUri==null) {
             imageUri = Uri.parse(String.valueOf(R.drawable.car));
             entroGaleria=false;
         }
 
-        Log.e("imageUri", imageUri.toString());
+        //Log.e("imageUri", imageUri.toString());
 
         HashMap<String, String> queryValues =  new  HashMap<String, String>();
         queryValues.put("idfoto", imageUri.toString());
