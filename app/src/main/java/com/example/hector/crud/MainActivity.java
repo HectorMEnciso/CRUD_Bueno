@@ -1,6 +1,7 @@
 package com.example.hector.crud;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -43,7 +44,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     private ArrayList<Coches> coches= new ArrayList<Coches>();
 
     public final static int SOCKET_PORT = 6000;
-    public final static String SERVER = "192.168.1.4";  // localhost
+    public final static String SERVER = "192.168.1.2";  // localhost
     Socket sock = null;
     FileOutputStream fos = null;
     BufferedOutputStream bos = null;
@@ -110,6 +111,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
                     startActivity(data);
                 }
             });
+
             adaptador = new SimpleAdapter(MainActivity.this,cochesList, R.layout.mi_layout, new String[] { "id" ,"idfoto","matricula","marca","modelo","motorizacion","cilindrada","fechaCompra"}, new int[] {R.id.ID,R.id.ivContactImage, R.id.lblMatricula, R.id.lblMarca,R.id.lblModelo,R.id.lblMotorizacion,R.id.lblCilindrada,R.id.lblFechaCompra});
             lstCoches.setAdapter(adaptador);
         }
@@ -138,6 +140,13 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
         return true;
     }
     @Override
